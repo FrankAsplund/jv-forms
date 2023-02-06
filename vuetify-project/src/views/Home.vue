@@ -1,5 +1,10 @@
 <template>
   <div class="home-container">
+
+    <div class="d-flex justify-center">
+      <h1>Fyll i formuläret</h1>
+    </div>
+
     <v-card>
       <v-tabs
         v-model="tab"
