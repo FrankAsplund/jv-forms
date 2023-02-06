@@ -7,6 +7,7 @@
 // Styles
 import '@mdi/font/css/materialdesignicons.css'
 import 'vuetify/styles'
+import ('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap')
 
 // Composables
 import { createVuetify } from 'vuetify'
