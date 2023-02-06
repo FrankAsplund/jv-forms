@@ -24,8 +24,8 @@
     <!-- INFOBOX -->
 
     <h2>Kundnummer</h2>
-    <v-text-field type="text" label="Länsbokstav"></v-text-field>
-    <v-text-field type="text" label="Nummer*" prepend-inner-icon="mdi-pound-box" append-inner-icon="mdi-help-box"></v-text-field>
+    <v-text-field type="text" label="Länsbokstav" />
+    <v-text-field type="text" label="Nummer*" prepend-inner-icon="mdi-pound-box" append-inner-icon="mdi-help-box" />
 </form>
 </template>
 

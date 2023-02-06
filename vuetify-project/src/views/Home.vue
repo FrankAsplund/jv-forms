@@ -23,7 +23,7 @@
           </v-window-item>
   
           <v-window-item value="two">
-            Ansökan
+            <FormApply />
           </v-window-item>
   
           <v-window-item value="three">
@@ -49,6 +49,7 @@ export default {
 
 <script setup>
   import Form from "../components/Form.vue"
+  import FormApply from "../components/FormApply.vue"
 </script>
 
 <style>
