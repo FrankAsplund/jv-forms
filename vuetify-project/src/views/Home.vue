@@ -19,7 +19,7 @@
       <v-card-text>
         <v-window v-model="tab">
           <v-window-item value="one">
-            Grunduppgifter 
+            <Form /> 
           </v-window-item>
   
           <v-window-item value="two">
