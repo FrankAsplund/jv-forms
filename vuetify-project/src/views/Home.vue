@@ -1,21 +1,18 @@
 <template>
-  <div class="home-container">
-
-    <div class="d-flex justify-center">
-      <h1>Fyll i formuläret</h1>
-    </div>
-
+  <div>
     <v-card>
       <v-tabs
         v-model="tab"
-        color="primary"
+        bg-color="white"
+        color="black"
       >
         <v-tab value="one">Grunduppgifter</v-tab>
         <v-tab value="two">Ansökan</v-tab>
         <v-tab value="three">Summering</v-tab>
         <v-tab value="four">Klar</v-tab>
       </v-tabs>
-  
+
+      <div class="bg-light-green-lighten-4 w-100">
       <v-card-text>
         <v-window v-model="tab">
           <v-window-item value="one">
@@ -35,6 +32,7 @@
           </v-window-item>
         </v-window>
       </v-card-text>
+    </div>
     </v-card>
     </div>
   </template>
