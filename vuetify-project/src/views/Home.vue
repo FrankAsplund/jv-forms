@@ -31,8 +31,15 @@
             Klar
           </v-window-item>
         </v-window>
+
+        <!-- <div class="d-flex justify-center my-2">
+              <v-btn value="two" size="large" color="green"> Nästa </v-btn>
+          </div> -->
+
       </v-card-text>
     </div>
+
+    
     </v-card>
     </div>
   </template>
