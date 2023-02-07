@@ -24,7 +24,7 @@
           </v-window-item>
   
           <v-window-item value="three">
-            Summering
+            <FormSummary />
           </v-window-item>
 
           <v-window-item value="four">
@@ -48,6 +48,7 @@ export default {
 <script setup>
   import Form from "../components/Form.vue"
   import FormApply from "../components/FormApply.vue"
+  import FormSummary from "../components/FormSummary.vue"
 </script>
 
 <style>
