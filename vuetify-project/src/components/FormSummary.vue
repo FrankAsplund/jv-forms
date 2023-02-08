@@ -1,68 +1,137 @@
 <template>
+    <v-form>
+        <div class="text-h3">Summering</div>
+        <div class="line-divider"></div>
 
-    <h1 class="h1-summary">Summering</h1>
-    <div class="line-divider"></div>
-
-    <div class="summary-info">
-        <p>
-            Här har du möjlighet att granska, gå tillbaka och ändra. <br />
-            Du kan hoppa till valfritt avsnitt genom att klicka på önskad sida i listan ovan.
-            Ändra uppgift och klicka sedan på denna sida i listan igen
-        </p>
-    </div>
-
-    <div class="flex-container">
-        <div class="flex-child">
-            <div class="box-title">Grunduppgifter</div>
-            <v-text-field prepend-inner-icon="mdi-account-box" type="text" label="Personnummer" />
-            <v-text-field prepend-inner-icon="mdi-alpha-a-box" type="text" label="Förnamn" />
-            <v-text-field prepend-inner-icon="mdi-alpha-a-box" type="text" label="Efternamn" />
-            <v-text-field prepend-inner-icon="mdi-form-select" label="Du ansöker som:" />
-            <v-text-field prepend-inner-icon="mdi-form-select" type="text" label="Länsbokstav" />
-            <v-text-field prepend-inner-icon="mdi-pound-box" type="text" label="Nummer" />
-            <v-text-field prepend-inner-icon="mdi-account-box" type="email" label="E-post" />
-            <v-btn class="summary-btn" color="success">Ändra uppgifter</v-btn>
+        <div class="summary-info">
+            <div class="text-body-2">
+                Här har du möjlighet att granska, gå tillbaka och ändra. <br />
+                Du kan hoppa till valfritt avsnitt genom att klicka på önskad sida i listan ovan.
+                Ändra uppgift och klicka sedan på denna sida i listan igen
+            </div>
         </div>
 
-        <div class="flex-child">
-            <div class="box-title">Ansökan</div>
-            <p class="apply-info">
-                Produktion som jag söker krisstöd för. <br />
-                Om du har sökt gårdsstöd eller nötkreaturstöd i SAM Internet 2019 så kommer Jordbruksverket att basera
-                ditt krisstöd på de uppgifter som du
-                angett i din SAM-ansökan.
-            </p>
-            <v-text-field label="Om jag fick gårdsstöd 2018" suffix="Ja" />
-            <v-text-field label="Om jag fick nötkreatursstöd 2018" suffix="Ja" />
-            <v-text-field label="Jag söker krisstöd för min får- och getproduktion" suffix="Ja" />
-            <v-text-field label="Jag söker krisstöd för min fjäderfäproduktion" suffix="Nej" />
-            <v-text-field value="Jag söker krisstöd för min grisproduktion" suffix="Nej" />
-            <v-text-field value="Jag söker krisstöd för min grisproduktion" suffix="Nej" />
-            <v-btn class="summary-btn" color="success">Ändra uppgifter</v-btn>
-        </div>
-    </div>
-
-    <v-container class="summaryConfirm" fluid>
-        <h3>Godkännande och försäkran</h3>
-        <v-checkbox v-model="summaryCheckbox" color="success">
-            <template v-slot:label>
-                <div>
-                    <p>Härmed ansöker jag om krisstödet 2023</p>
-                    <p>Jag intygar att: <br />
-                        <li>Jag är införstådd med och uppfyller de villkor som finns för att få ta del av stödet.</li>
-                        <li>Ansökan inte gäller ett företag i ekonomiska svårigheter enligt art. 2.14 i förordningen
-                            (EU) nr
-                            702/2014</li>
-                    </p>
+        <div class="flex-container">
+            <div class="flex-child">
+                <div class="box-title">Grunduppgifter</div>
+                <!-- <v-text-field name="personnummer" type="text" label="Personnummer" prepend-inner-icon="mdi-account-box" />
+                <v-text-field name="firstname" type="text" label="Förnamn" prepend-inner-icon="mdi-alpha-a-box" />
+                <v-text-field name="lastname" type="text" label="Efternamn" prepend-inner-icon="mdi-alpha-a-box" />
+                <v-text-field name="applyAs" type="text" label="Du ansöker som:" prepend-inner-icon="mdi-form-select" />
+                <v-text-field name="county" type="text" label="Länsbokstav" prepend-inner-icon="mdi-form-select" />
+                <v-text-field name="number" type="text" label="Nummer" prepend-inner-icon="mdi-pound-box" />
+                <v-text-field name="userEmail" type="email" label="E-post" prepend-inner-icon="mdi-account-box" />
+                <v-btn class="summary-btn" color="success">Ändra uppgifter</v-btn> -->
+                <v-table density="compact">
+                    <thead>
+                        <tr>
+                            <th class="text-left">Förnamn</th>
+                            <th class="text-right">Daniel</th>
+                        </tr>
+                        <tr>
+                            <th class="text-left">Efternamn</th>
+                            <th class="text-right">Bladh Stenberg</th>
+                        </tr>
+                        <tr>
+                            <th class="text-left">Personnummer</th>
+                            <th class="text-right">1992-10-18-XXXX</th>
+                        </tr>
+                        <tr>
+                            <th class="text-left">Jag ansöker som:</th>
+                            <th class="text-right">Privatperson</th>
+                        </tr>
+                        <tr>
+                            <th class="text-left">Länsbokstav</th>
+                            <th class="text-right">AB-Stockholm</th>
+                        </tr>
+                        <tr>
+                            <th class="text-left">Nummer</th>
+                            <th class="text-right">XXXXXX</th>
+                        </tr>
+                        <tr>
+                            <th class="text-left">E-post</th>
+                            <th class="text-right">daniel@onify.co</th>
+                        </tr>
+                    </thead>
+                </v-table>
+                <div class="summary-btn">
+                    <v-btn color="success">Ändra uppgifter</v-btn>
                 </div>
-            </template>
-        </v-checkbox>
-        <div class="send-btn">
-            <v-btn class="send-btn" v-bind:disabled="summaryCheckbox === false" color="success">
-                Skicka in
-            </v-btn>
+            </div>
+
+
+            <div class="flex-child">
+                <div class="box-title">Ansökan</div>
+                <div class="text-caption">
+                    Produktion som jag söker krisstöd för. <br />
+                    Om du har sökt gårdsstöd eller nötkreaturstöd i SAM Internet 2019 så kommer Jordbruksverket att
+                    basera
+                    ditt krisstöd på de uppgifter som du
+                    angett i din SAM-ansökan.
+                </div>
+                <!-- <v-text-field focused value="Om jag fick gårdsstöd 2018" suffix="Ja" />
+                <v-text-field focused value="Om jag fick nötkreatursstöd 2018" suffix="Ja" />
+                <v-text-field focused value="Jag söker krisstöd för min får- och getproduktion" suffix="Ja" />
+                <v-text-field focused value="Jag söker krisstöd för min fjäderfäproduktion" suffix="Nej" />
+                <v-text-field focused value="Jag söker krisstöd för min grisproduktion" suffix="Nej" />
+                <v-btn class="summary-btn" color="success">Ändra uppgifter</v-btn> -->
+                <v-table density="compact">
+                    <thead>
+                        <tr>
+                            <th class="text-left">Om jag fick gårdsstöd 2018</th>
+                            <th class="text-right">Ja</th>
+                        </tr>
+                        <tr>
+                            <th class="text-left">Om jag fick nötkreatursstöd 2018</th>
+                            <th class="text-right">Ja</th>
+                        </tr>
+                        <tr>
+                            <th class="text-left">Jag söker krisstöd för min får- och getproduktion</th>
+                            <th class="text-right">Ja</th>
+                        </tr>
+                        <tr>
+                            <th class="text-left">Jag söker krisstöd för min grisproduktion</th>
+                            <th class="text-right">Nej</th>
+                        </tr>
+                        <tr>
+                            <th class="text-left">Jag söker krisstöd för min fjäderfäproduktion</th>
+                            <th class="text-right">Nej</th>
+                        </tr>
+                    </thead>
+                </v-table>
+                <div class="summary-btn">
+                    <v-btn color="success">Ändra uppgifter</v-btn>
+                </div>
+            </div>
         </div>
-    </v-container>
+
+        <v-container class="summaryConfirm" fluid>
+            <div class="text-subtitle-1">Godkännande och försäkran</div>
+            <v-checkbox v-model="summaryCheckbox" color="success">
+                <template v-slot:label>
+                    <div>
+                        <div class="text-body-2">Härmed ansöker jag om krisstödet 2023</div>
+                        <v-list>Jag intygar att: <br />
+                            <v-list-item prepend-icon="mdi-circle-small">Jag är införstådd med och uppfyller de villkor
+                                som
+                                finns för att få ta del av
+                                stödet.</v-list-item>
+                            <v-list-item prepend-icon="mdi-circle-small">Ansökan inte gäller ett företag i ekonomiska
+                                svårigheter enligt art. 2.14 i
+                                förordningen
+                                (EU) nr
+                                702/2014</v-list-item>
+                        </v-list>
+                    </div>
+                </template>
+            </v-checkbox>
+            <div class="send-btn">
+                <v-btn v-bind:disabled="summaryCheckbox === false" color="success">
+                    Skicka in
+                </v-btn>
+            </div>
+        </v-container>
+    </v-form>
 </template>
 
 <script>
@@ -76,6 +145,11 @@ export default {
 </script>
 
 <style scoped>
+.summary-btn {
+    text-align: center;
+    padding: 10px;
+}
+
 .summaryConfirm {
     margin: auto;
     width: 50%;
@@ -119,7 +193,7 @@ export default {
 .line-divider {
     margin-top: 1.5rem;
     margin-bottom: 0.5rem;
-    border-bottom: 2px solid brown
+    border-bottom: 2px solid rgb(156, 207, 111)
 }
 
 .summary-info {

@@ -28,7 +28,7 @@
           </v-window-item>
 
           <v-window-item value="four">
-            Klar
+            <FormDone />
           </v-window-item>
         </v-window>
 
@@ -56,6 +56,7 @@ export default {
   import Form from "../components/Form.vue"
   import FormApply from "../components/FormApply.vue"
   import FormSummary from "../components/FormSummary.vue"
+  import FormDone from "../components/FormDone.vue"
 </script>
 
 <style>
