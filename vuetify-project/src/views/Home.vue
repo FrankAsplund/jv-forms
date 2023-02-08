@@ -1,17 +1,11 @@
 <template>
-  <div>
-    <v-card>
-      <v-tabs
-        v-model="tab"
-        bg-color="white"
-        color="black"
-      >
+  <v-card>
+      <v-tabs v-model="tab" bg-color="white" color="black">
         <v-tab value="one">Grunduppgifter</v-tab>
         <v-tab value="two">Ansökan</v-tab>
         <v-tab value="three">Summering</v-tab>
         <v-tab value="four">Klar</v-tab>
       </v-tabs>
-
       <div class="bg-light-green-lighten-4 w-100">
       <v-card-text>
         <v-window v-model="tab">
@@ -31,17 +25,9 @@
             Klar
           </v-window-item>
         </v-window>
-
-        <!-- <div class="d-flex justify-center my-2">
-              <v-btn value="two" size="large" color="green"> Nästa </v-btn>
-          </div> -->
-
       </v-card-text>
     </div>
-
-    
-    </v-card>
-    </div>
+  </v-card>
   </template>
 
 <script>
@@ -59,8 +45,4 @@ export default {
 </script>
 
 <style>
-.h1 {
-  display: flex;
-  justify-content: center;
-}
 </style>
