@@ -14,14 +14,6 @@
         <div class="flex-container">
             <div class="flex-child">
                 <div class="box-title">Grunduppgifter</div>
-                <!-- <v-text-field name="personnummer" type="text" label="Personnummer" prepend-inner-icon="mdi-account-box" />
-                <v-text-field name="firstname" type="text" label="Förnamn" prepend-inner-icon="mdi-alpha-a-box" />
-                <v-text-field name="lastname" type="text" label="Efternamn" prepend-inner-icon="mdi-alpha-a-box" />
-                <v-text-field name="applyAs" type="text" label="Du ansöker som:" prepend-inner-icon="mdi-form-select" />
-                <v-text-field name="county" type="text" label="Länsbokstav" prepend-inner-icon="mdi-form-select" />
-                <v-text-field name="number" type="text" label="Nummer" prepend-inner-icon="mdi-pound-box" />
-                <v-text-field name="userEmail" type="email" label="E-post" prepend-inner-icon="mdi-account-box" />
-                <v-btn class="summary-btn" color="success">Ändra uppgifter</v-btn> -->
                 <v-table density="compact">
                     <thead>
                         <tr>
@@ -69,12 +61,6 @@
                     ditt krisstöd på de uppgifter som du
                     angett i din SAM-ansökan.
                 </div>
-                <!-- <v-text-field focused value="Om jag fick gårdsstöd 2018" suffix="Ja" />
-                <v-text-field focused value="Om jag fick nötkreatursstöd 2018" suffix="Ja" />
-                <v-text-field focused value="Jag söker krisstöd för min får- och getproduktion" suffix="Ja" />
-                <v-text-field focused value="Jag söker krisstöd för min fjäderfäproduktion" suffix="Nej" />
-                <v-text-field focused value="Jag söker krisstöd för min grisproduktion" suffix="Nej" />
-                <v-btn class="summary-btn" color="success">Ändra uppgifter</v-btn> -->
                 <v-table density="compact">
                     <thead>
                         <tr>
