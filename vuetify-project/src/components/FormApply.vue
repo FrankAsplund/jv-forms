@@ -1,6 +1,6 @@
 <template>
     <v-container>
-    <form>
+    <v-form>
         <div class="mt-2 mb-8">
             <h2>Produktion</h2>
         </div>
