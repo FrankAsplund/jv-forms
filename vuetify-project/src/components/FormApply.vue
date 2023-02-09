@@ -1,8 +1,5 @@
 <template>
     <v-container>
-        <div class="d-flex justify-center my-2">
-            <h1 class="label">Ansökan</h1>
-        </div>
     <form>
         <div class="mt-2 mb-8">
             <h2>Produktion</h2>
