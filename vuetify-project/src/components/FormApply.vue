@@ -81,13 +81,15 @@
     </v-container>
 </template>
 
-<script setup>
+<script>
 import cHeader from "./form-components/c-header.vue";
 import cBody from "./form-components/c-body.vue";
-</script>
 
-<script>
 export default {
+    components: {
+        cHeader: cHeader,
+        cBody: cBody,
+    },
     data() {
         return {
             productionType: false,
