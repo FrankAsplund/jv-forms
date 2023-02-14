@@ -55,28 +55,24 @@
             <div class="flex-child">
                 <div class="box-title">Ansökan</div>
                 <div class="text-caption">
-                    Produktion som jag söker krisstöd för. <br />
-                    Om du har sökt gårdsstöd eller nötkreaturstöd i SAM Internet 2019 så kommer Jordbruksverket att
-                    basera
-                    ditt krisstöd på de uppgifter som du
-                    angett i din SAM-ansökan.
+
                 </div>
                 <v-table density="compact">
                     <thead>
                         <tr>
-                            <th class="text-left">Om jag fick gårdsstöd 2018</th>
+                            <th class="text-left">Antal kalkoner över 24 veckor i din besättning:</th>
                             <th class="text-right">Ja</th>
                         </tr>
                         <tr>
-                            <th class="text-left">Om jag fick nötkreatursstöd 2018</th>
+                            <th class="text-left">Antal slaktkycklingar i normal uppfödningsomgång:</th>
                             <th class="text-right">Ja</th>
                         </tr>
                         <tr>
-                            <th class="text-left">Jag söker krisstöd för min får- och getproduktion</th>
+                            <th class="text-left">Antal kalkonkyckling för äggproduktion:</th>
                             <th class="text-right">Ja</th>
                         </tr>
                         <tr>
-                            <th class="text-left">Jag söker krisstöd för min grisproduktion</th>
+                            <th class="text-left">Total summa:</th>
                             <th class="text-right">Nej</th>
                         </tr>
                         <tr>
