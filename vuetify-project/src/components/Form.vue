@@ -3,32 +3,30 @@
     <v-container class="pa-2 rounded-sm align-items">
       <c-body body="Ange dina uppgifter" />
       <v-row variant="outlined">
-        <v-col cols="12" md="12" variant="outlined">
+        <v-row variant="outlined" class="ma-2 pa-0">
           <v-text-field
             label="Förnamn"
             type="text"
             prepend-inner-icon="mdi-account-box"
             :rules="[(v) => !!v || 'Förnamn måste fyllas i']"
-            v-model="formData.firstname"
+            disabled
           ></v-text-field>
           <v-text-field
             label="Efternamn"
             type="text"
             prepend-inner-icon="mdi-account-box"
             :rules="[(v) => !!v || 'Efternamn måste fyllas i']"
-            v-model="formData.lastname"
+            disabled
           ></v-text-field>
-        </v-col>
-        <v-col cols="12" md="6">
           <v-text-field
             label="Personnummer"
             type="text"
             prepend-inner-icon="mdi-account-box"
             :rules="[(v) => !!v || 'Personnummer måste fyllas i']"
             hint="Personnummer måste anges enligt följande format: YYYY-MM-DD-XXXX."
-            v-model="formData.ssn"
+            disabled
           ></v-text-field>
-        </v-col>
+        </v-row>
         <v-col cols="12" md="12">
           <v-text-field
             label="E-post"
@@ -36,14 +34,17 @@
             prepend-inner-icon="mdi-email"
             :rules="[(v) => !!v || 'E-post måste fyllas i']"
             v-model="formData.email"
+            hint="Skriv in din e-postadress (Denna text ska ändras)"
           ></v-text-field>
           <v-text-field
             label="Upprepa E-post"
             type="email"
             prepend-inner-icon="mdi-email"
+            hint="Skriv in samma e-postadress som ovan (Denna text ska ändras)"
           ></v-text-field>
         </v-col>
       </v-row>
+
       <v-row variant="tonal" class="pa-2">
         <v-col>
           <c-body
@@ -79,24 +80,6 @@
             v-model="formData.applyNumber"
           ></v-text-field>
         </v-container>
-      </v-container>
-
-      <v-container class="pa-0">
-        <c-body body="Ange stödmottagarens uppgifter" />
-        <v-text-field
-          type="text"
-          placeholder="XXXXXX-XXXX"
-          label="Organisationsnummer"
-          hint="Ange stödmottagarens 10-siffriga organisationsnummer enligt följande format: XXXXXX-XXXX. Var noga med att organisationsnumret är kopplat till det kundnummer du anger i ansökan."
-          v-model="formData.orgnr"
-        ></v-text-field>
-        <v-text-field
-          type="text"
-          label="Företagets/Organisationens namn"
-          append-inner-icon="mdi-domain"
-          hint="Ange stödmottagarens företags- eller organisationsnamn."
-          v-model="formData.orgname"
-        ></v-text-field>
       </v-container>
     </v-container>
 
@@ -152,15 +135,13 @@ export default {
       ],
 
       formData: {
-        firstname: "",
-        lastname: "",
-        ssn: "", // Social Security Number, personnummer på engelska
+        firstname: "xxxxx",
+        lastname: "xxxxxxx",
+        ssn: "0000-00-00-0000", // Social Security Number, personnummer på engelska
         email: "",
         apply: "", //Ombud, privatperson osv
         applyCounty: "",
         applyNumber: "",
-        orgnr: "",
-        orgname: "",
       },
       response: "",
       success: false,
@@ -183,6 +164,7 @@ export default {
         .then((response) => {
           this.response = JSON.stringify(response.data);
           console.log(JSON.stringify(response.data));
+          document.forms[0].reset();
           this.success = true;
           this.error = false;
         })
@@ -200,7 +182,7 @@ export default {
 form {
   max-width: 80%;
   background: white;
-  margin: 30px 30px 0px 30px;
+  margin: 0px 30px 0px 30px;
   text-align: left;
   padding: 20px;
   border-radius: 10px;
