@@ -21,18 +21,18 @@
                     <v-card class="w-100 h-75 my-4" v-if="showHens">
                         <v-text-field name="" v-model="field1" type="text"
                             label="Ange genomsnittlig antal höns äldre än 20 veckor i din besättning 2023"
-                            prepend-icon="mdi-plus"></v-text-field>
+                            prepend-icon="mdi-plus-box"></v-text-field>
 
                         <v-text-field name="" v-model="field2" type="text"
                             label="Ange antal slaktkycklingar i en normal uppfödningsomgång under år 2023"
-                            prepend-icon="mdi-plus"></v-text-field>
+                            prepend-icon="mdi-plus-box"></v-text-field>
 
                         <v-text-field name="" v-model="field3" type="text"
                             label="Ange genomsnittligt antal kycklingar för äggproduktion i din besättning 2023"
-                            prepend-icon="mdi-plus"></v-text-field>
+                            prepend-icon="mdi-plus-box"></v-text-field>
 
                         <v-text-field name="" label="Total summa" v-model="totalHens" readonly
-                            prepend-icon="mdi-equal"></v-text-field>
+                            prepend-icon="mdi-equal-box"></v-text-field>
                     </v-card>
                 </v-container>
             </v-container>
@@ -43,18 +43,18 @@
                     <v-card class="w-100 h-75 my-4" v-if="showTurkeys">
                         <v-text-field name="" v-model="field4"
                             label="Ange genomsnittligt antal kalkoner över 24 veckor i din besättning 2023"
-                            prepend-inner-icon="mdi-plus-box"></v-text-field>
+                            prepend-icon="mdi-plus-box"></v-text-field>
 
                         <v-text-field name="" v-model="field5"
                             label="Ange antal slaktkalkoner i en normal uppfödningsomgång under år 2023"
-                            prepend-inner-icon="mdi-plus-box"></v-text-field>
+                            prepend-icon="mdi-plus-box"></v-text-field>
 
                         <v-text-field name="" v-model="field6"
                             label="Ange genomsnittligt antal kalkonkycklingar för äggproduktion i din besättning 2023"
-                            prepend-inner-icon="mdi-plus-box"></v-text-field>
+                            prepend-icon="mdi-plus-box"></v-text-field>
 
                         <v-text-field name="" label="Total summa" v-model="totalTurkeys" readonly
-                            prepend-inner-icon="mdi-pound-box">
+                            prepend-icon="mdi-equal-box">
                         </v-text-field>
                     </v-card>
                 </v-container>
@@ -65,16 +65,14 @@
                     Om du har dina kalkoner i en kommersiell verksamhet måste du ange produktionsplats.
                 </div>
                 <v-text-field label="Produktionsplatsnummer"
-                    hint="Ange den/de produktionsplatser där du bedrev din produktion 2023. Varje nummer består av upp till 6 siffor."></v-text-field>
-                <v-text-field v-for="(field, index) in productPlaceFields.slice(1)" :key="index"
-                    :label="'Produktionsplatsnummer ' + (index + 2)" v-model="field.value">
-                    <!-- <v-icon append-inner-icon @click="removeProductionPlace(index + 1)">mdi-delete</v-icon> -->
+                    hint="Ange den/de produktionsplatser där du bedrev din produktion 2023. Varje nummer består av upp till 6 siffor.">
+                </v-text-field>
+                <v-text-field v-for="(field, index) in productPlaceFields" :key="index"
+                    :label="'Produktionsplatsnummer'" append-inner-icon="mdi-delete" 
+                    @click:append-inner="() => removeProductionPlace(index)" v-model="field.value">
                 </v-text-field>
                 <v-btn @click="addProductionPlace" prepend-icon="mdi-plus" color="success" class="my-4">
-                    Lägg till ytterligare produktionsplats
-                </v-btn>
-                <v-btn @click="removeAllProductionPlaces" prepend-icon="mdi-delete" color="red" block min-width="0">
-                    Rensa
+                    Lägg till produktionsplats
                 </v-btn>
             </v-container>
         </v-form>
@@ -97,11 +95,13 @@ export default {
             field1: null,
             field2: null,
             field3: null,
+            totalHens: null,
             showTurkeys: false,
             field4: null,
             field5: null,
             field6: null,
-            productPlaceFields: [{ value: '' }],
+            totalTurkeys: null,
+            productPlaceFields: [],
         }
     },
     computed: {
@@ -117,10 +117,7 @@ export default {
             this.productPlaceFields.push({ value: '' });
         },
         removeProductionPlace(index) {
-            this.productPlaceFields.splice(index + 1,);
-        },
-        removeAllProductionPlaces() {
-            this.productPlaceFields = [{ value: '' }];
+            this.productPlaceFields.splice(index, 1);
         }
     }
 }
