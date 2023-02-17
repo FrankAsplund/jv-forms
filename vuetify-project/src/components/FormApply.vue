@@ -7,8 +7,7 @@
 
             <div>
                 <v-hover v-slot="{ isHovering, props }">
-                    <v-card class="w-75 h-75 my-4" v-bind="props"
-                        :color="isHovering ? 'light-green-lighten-5' : undefined">
+                    <v-card class="w-75 h-75 my-4" v-bind="props" :color="isHovering ? 'light-green-lighten-5' : undefined">
                         <v-checkbox v-model="productionType" label="Jag söker krisstöd för min fjäderfäproduktion"
                             color="success" hide-details />
                     </v-card>
@@ -53,8 +52,7 @@
                             label="Ange genomsnittligt antal kalkonkycklingar för äggproduktion i din besättning 2023"
                             prepend-icon="mdi-plus-box"></v-text-field>
 
-                        <v-text-field label="Total summa" v-model="totalTurkeys" readonly
-                            prepend-icon="mdi-equal-box">
+                        <v-text-field label="Total summa" v-model="totalTurkeys" readonly prepend-icon="mdi-equal-box">
                         </v-text-field>
                     </v-card>
                 </v-container>
@@ -64,19 +62,21 @@
                 <div class="text-subtitle-1">
                     Om du har dina kalkoner i en kommersiell verksamhet måste du ange produktionsplats.
                 </div>
-                <v-text-field label="Produktionsplatsnummer"
+                <v-text-field label="Produktionsplatsnummer" prefix="SE"
                     hint="Ange den/de produktionsplatser där du bedrev din produktion 2023. Varje nummer består av upp till 6 siffor.">
                 </v-text-field>
-                <v-text-field v-for="(field, index) in productPlaceFields" :key="index"
-                    :label="'Produktionsplatsnummer'" append-inner-icon="mdi-delete" 
-                    @click:append-inner="() => removeProductionPlace(index)" v-model="field.value">
+                <v-text-field v-for="(field, index) in productPlaceFields" :key="index" :label="'Produktionsplatsnummer'"
+                    prefix="SE" v-model="field.value">
+                    <template v-slot:append>
+                        <v-icon @click="removeProductionPlace(index)" :style="{ color: 'red' }">mdi-delete</v-icon>
+                    </template>
                 </v-text-field>
                 <v-btn @click="addProductionPlace" prepend-icon="mdi-plus" color="success" class="my-4">
                     Lägg till produktionsplats
                 </v-btn>
             </v-container>
         </v-form>
-    </v-container>
+</v-container>
 </template>
 
 <script>
@@ -124,5 +124,9 @@ export default {
 <style scoped>
 .productionplace-container {
     margin-top: 5rem;
+}
+
+.my-field .v-icon {
+    color: red !important;
 }
 </style>
