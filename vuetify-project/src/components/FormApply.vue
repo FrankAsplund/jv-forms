@@ -19,19 +19,19 @@
                 <v-container>
                     <v-checkbox label="Hönsproduktion" color="success" v-model="showHens" hide-details />
                     <v-card class="w-100 h-75 my-4" v-if="showHens">
-                        <v-text-field name="" v-model="field1" type="text"
+                        <v-text-field v-model="field1" type="text"
                             label="Ange genomsnittlig antal höns äldre än 20 veckor i din besättning 2023"
                             prepend-icon="mdi-plus-box"></v-text-field>
 
-                        <v-text-field name="" v-model="field2" type="text"
+                        <v-text-field v-model="field2" type="text"
                             label="Ange antal slaktkycklingar i en normal uppfödningsomgång under år 2023"
                             prepend-icon="mdi-plus-box"></v-text-field>
 
-                        <v-text-field name="" v-model="field3" type="text"
+                        <v-text-field v-model="field3" type="text"
                             label="Ange genomsnittligt antal kycklingar för äggproduktion i din besättning 2023"
                             prepend-icon="mdi-plus-box"></v-text-field>
 
-                        <v-text-field name="" label="Total summa" v-model="totalHens" readonly
+                        <v-text-field label="Total summa" v-model="totalHens" readonly
                             prepend-icon="mdi-equal-box"></v-text-field>
                     </v-card>
                 </v-container>
@@ -41,19 +41,19 @@
                 <v-container>
                     <v-checkbox label="Kalkonproduktion" color="success" v-model="showTurkeys" hide-details />
                     <v-card class="w-100 h-75 my-4" v-if="showTurkeys">
-                        <v-text-field name="" v-model="field4"
+                        <v-text-field v-model="field4"
                             label="Ange genomsnittligt antal kalkoner över 24 veckor i din besättning 2023"
                             prepend-icon="mdi-plus-box"></v-text-field>
 
-                        <v-text-field name="" v-model="field5"
+                        <v-text-field v-model="field5"
                             label="Ange antal slaktkalkoner i en normal uppfödningsomgång under år 2023"
                             prepend-icon="mdi-plus-box"></v-text-field>
 
-                        <v-text-field name="" v-model="field6"
+                        <v-text-field v-model="field6"
                             label="Ange genomsnittligt antal kalkonkycklingar för äggproduktion i din besättning 2023"
                             prepend-icon="mdi-plus-box"></v-text-field>
 
-                        <v-text-field name="" label="Total summa" v-model="totalTurkeys" readonly
+                        <v-text-field label="Total summa" v-model="totalTurkeys" readonly
                             prepend-icon="mdi-equal-box">
                         </v-text-field>
                     </v-card>
@@ -95,12 +95,10 @@ export default {
             field1: null,
             field2: null,
             field3: null,
-            totalHens: null,
             showTurkeys: false,
             field4: null,
             field5: null,
             field6: null,
-            totalTurkeys: null,
             productPlaceFields: [],
         }
     },
