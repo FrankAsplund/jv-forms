@@ -1,6 +1,5 @@
 <template>
   <div class="d-flex bg-light-green-lighten-4 justify-center h-100">
-    <!-- <c-bg> -->
     <v-container class="rounded mx-12">
       <v-card class="rounded-t-lg">
         <v-toolbar
@@ -54,14 +53,16 @@
         </v-window>
       </v-card>
     </v-container>
-    <!-- </c-bg> -->
   </div>
 </template>
 
 <script>
 export default {
   components: {
-    cBg: cBg,
+    Form,
+    FormApply,
+    FormSummary,
+    FormDone,
   },
   name: "Home",
   data: () => ({
@@ -92,6 +93,31 @@ export default {
         item.disabled = index !== this.step - 1;
       });
     },
+
+    submitForm() {
+      var config = {
+        method: "POST",
+        url: "https://dummy.restapiexample.com/api/v1/create",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: JSON.stringify(this.formData),
+      };
+
+      axios(config)
+        .then((response) => {
+          this.response = JSON.stringify(response.data);
+          console.log(JSON.stringify(response.data));
+          document.forms[0].reset();
+          this.success = true;
+          this.error = false;
+        })
+        .catch((error) => {
+          console.log(error);
+          this.error = error.message;
+          this.success = false;
+        });
+    },
   },
   computed: {
     currentTitle() {
@@ -106,11 +132,21 @@ export default {
 </script>
 
 <script setup>
-import cBg from "../components/form-components/c-bg.vue";
 import Form from "../components/Form.vue";
 import FormApply from "../components/FormApply.vue";
 import FormSummary from "../components/FormSummary.vue";
 import FormDone from "../components/FormDone.vue";
 </script>
+
+<!-- <script lang="ts" setup>
+import { useVModel } from '@vueuse/core'
+
+const props = defineProps<{
+  modelValue: string
+}>()
+const emit = defineEmits(['update:modelValue'])
+
+const data = useVModel(props, 'modelValue', emit)
+</script> -->
 
 <style></style>

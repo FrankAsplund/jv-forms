@@ -115,6 +115,16 @@ import cHeader from "./form-components/c-header.vue";
 import cBody from "./form-components/c-body.vue";
 import items from "./form-components/counties.js";
 import axios from "axios";
+/* import { useVModel } from "@vueuse/core"; */
+
+/* const props = defineProps({
+  formObj: Object,
+  test: String,
+});
+
+const emit = defineEmits(["update:modelValue", "update:formObj"]);
+
+const formObject = useVModel(props, "formObj", emit); */
 </script>
 
 <script>
@@ -135,9 +145,9 @@ export default {
       ],
 
       formData: {
-        firstname: "xxxxx",
+        /* firstname: "xxxxx",
         lastname: "xxxxxxx",
-        ssn: "0000-00-00-0000", // Social Security Number, personnummer på engelska
+        ssn: "0000-00-00-0000",  */
         email: "",
         apply: "", //Ombud, privatperson osv
         applyCounty: "",
@@ -150,7 +160,7 @@ export default {
   },
 
   methods: {
-    submitForm() {
+    /* submitForm() {
       var config = {
         method: "POST",
         url: "https://dummy.restapiexample.com/api/v1/create",
@@ -173,7 +183,7 @@ export default {
           this.error = error.message;
           this.success = false;
         });
-    },
+    }, */
   },
 };
 </script>
