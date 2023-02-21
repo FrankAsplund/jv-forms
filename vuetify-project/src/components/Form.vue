@@ -7,23 +7,22 @@
           <v-text-field
             label="Förnamn"
             type="text"
+            model-value="John"
             prepend-inner-icon="mdi-account-box"
-            :rules="[(v) => !!v || 'Förnamn måste fyllas i']"
             disabled
           ></v-text-field>
           <v-text-field
             label="Efternamn"
+            model-value="Doe"
             type="text"
             prepend-inner-icon="mdi-account-box"
-            :rules="[(v) => !!v || 'Efternamn måste fyllas i']"
             disabled
           ></v-text-field>
           <v-text-field
             label="Personnummer"
             type="text"
+            model-value="12456-1234"
             prepend-inner-icon="mdi-account-box"
-            :rules="[(v) => !!v || 'Personnummer måste fyllas i']"
-            hint="Personnummer måste anges enligt följande format: YYYY-MM-DD-XXXX."
             disabled
           ></v-text-field>
         </v-row>
