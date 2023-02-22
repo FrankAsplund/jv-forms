@@ -1,5 +1,5 @@
 <template>
-  <v-form validate-on="submit" @submit.prevent="submitForm">
+  <v-form>
     <v-container class="pa-2 rounded-sm align-items">
       <c-body body="Ange dina uppgifter" />
       <v-row variant="outlined">
@@ -94,7 +94,7 @@
     </v-container>
   </v-form>
 
-  <v-alert
+  <!-- <v-alert
     v-model="alert"
     v-if="success"
     type="success"
@@ -106,7 +106,7 @@
   </v-alert>
   <v-alert v-if="error" type="error">
     {{ error }}
-  </v-alert>
+  </v-alert> -->
 </template>
 
 <script setup>
@@ -114,16 +114,35 @@ import cHeader from "./form-components/c-header.vue";
 import cBody from "./form-components/c-body.vue";
 import items from "./form-components/counties.js";
 import axios from "axios";
-/* import { useVModel } from "@vueuse/core"; */
 
-/* const props = defineProps({
-  formObj: Object,
-  test: String,
-});
+/* async function submitForm() {
+  const formData = {
+    firstname: "John",
+    lastname: "Doe",
+    ssn: "12456-1234",
+    email: this.email,
+    apply: this.apply,
+    applyCounty: this.applyCounty,
+    applyNumber: this.applyNumber,
+  };
 
-const emit = defineEmits(["update:modelValue", "update:formObj"]);
+  try {
+    const response = await axios.post(
+      "https://dummy.restapiexample.com/api/v1/create",
+      formData,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
-const formObject = useVModel(props, "formObj", emit); */
+    console.log(response.data);
+    document.forms[0].reset();
+  } catch (error) {
+    console.log(error);
+  }
+} */
 </script>
 
 <script>
@@ -142,24 +161,28 @@ export default {
         "Jag söker som ombud för privatperson/enskild firma",
         "Jag söker som ombud för ett företag eller organisation",
       ],
+      /* email: "",
+      apply: "", //Ombud, privatperson osv
+      applyCounty: "",
+      applyNumber: "", */
 
       formData: {
-        /* firstname: "xxxxx",
-        lastname: "xxxxxxx",
-        ssn: "0000-00-00-0000",  */
+        firstname: "John",
+        lastname: "Doe",
+        ssn: "12456-1234",
         email: "",
-        apply: "", //Ombud, privatperson osv
+        apply: "",
         applyCounty: "",
         applyNumber: "",
       },
-      response: "",
+      /* response: "",
       success: false,
-      error: false,
+      error: false, */
     };
   },
 
-  methods: {
-    /* submitForm() {
+  /* methods: {
+    submitForm() {
       var config = {
         method: "POST",
         url: "https://dummy.restapiexample.com/api/v1/create",
@@ -174,16 +197,12 @@ export default {
           this.response = JSON.stringify(response.data);
           console.log(JSON.stringify(response.data));
           document.forms[0].reset();
-          this.success = true;
-          this.error = false;
         })
         .catch((error) => {
           console.log(error);
-          this.error = error.message;
-          this.success = false;
         });
-    }, */
-  },
+    },
+  }, */
 };
 </script>
 

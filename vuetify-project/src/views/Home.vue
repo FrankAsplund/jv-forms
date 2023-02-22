@@ -36,7 +36,7 @@
 
         <v-window v-model="step" class="mx-12">
           <v-window-item :value="1">
-            <Form />
+            <Form @submit.prevent="submitForm" />
           </v-window-item>
 
           <v-window-item :value="2">
@@ -56,6 +56,45 @@
   </div>
 </template>
 
+<script setup>
+import Form from "../components/Form.vue";
+import FormApply from "../components/FormApply.vue";
+import FormSummary from "../components/FormSummary.vue";
+import FormDone from "../components/FormDone.vue";
+
+import axios from "axios";
+
+async function submitForm() {
+  const formData = {
+    firstname: "John",
+    lastname: "Doe",
+    ssn: "12456-1234",
+    email: this.email,
+    apply: this.apply,
+    applyCounty: this.applyCounty,
+    applyNumber: this.applyNumber,
+  };
+
+  try {
+    const response = await axios.post(
+      "https://dummy.restapiexample.com/api/v1/create",
+      formData,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    /* this.response = response.data; */
+    console.log(response.data);
+    document.forms[0].reset();
+  } catch (error) {
+    console.log(error);
+  }
+}
+</script>
+
 <script>
 export default {
   components: {
@@ -65,27 +104,39 @@ export default {
     FormDone,
   },
   name: "Home",
-  data: () => ({
-    step: 1,
-    items: [
-      {
-        title: "Grunduppgifter",
-        disabled: false,
+  data() {
+    return {
+      step: 1,
+      items: [
+        {
+          title: "Grunduppgifter",
+          disabled: false,
+        },
+        {
+          title: "Ansökan",
+          disabled: true,
+        },
+        {
+          title: "Summering",
+          disabled: true,
+        },
+        {
+          title: "Klar",
+          disabled: true,
+        },
+      ],
+
+      formData: {
+        firstname: "John",
+        lastname: "Doe",
+        ssn: "12456-1234",
+        email: "",
+        apply: "",
+        applyCounty: "",
+        applyNumber: "",
       },
-      {
-        title: "Ansökan",
-        disabled: true,
-      },
-      {
-        title: "Summering",
-        disabled: true,
-      },
-      {
-        title: "Klar",
-        disabled: true,
-      },
-    ],
-  }),
+    };
+  },
 
   methods: {
     updateDisabled() {
@@ -93,8 +144,33 @@ export default {
         item.disabled = index !== this.step - 1;
       });
     },
+  },
 
-    submitForm() {
+  /* async submitForm() {
+      const formData = {
+        name: this.name,
+        email: this.email,
+        apply: this.apply,
+        applyCounty: this.applyCounty,
+        applyNumber: this.applyNumber,
+      };
+
+      const response = await fetch('https://dummy.restapiexample.com/api/v1/create', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
+
+      if (response.ok) {
+
+      } else {
+
+      }
+    }, */
+
+  /* submitForm() {
       var config = {
         method: "POST",
         url: "https://dummy.restapiexample.com/api/v1/create",
@@ -109,16 +185,12 @@ export default {
           this.response = JSON.stringify(response.data);
           console.log(JSON.stringify(response.data));
           document.forms[0].reset();
-          this.success = true;
-          this.error = false;
         })
         .catch((error) => {
           console.log(error);
-          this.error = error.message;
-          this.success = false;
         });
     },
-  },
+  }, */
   computed: {
     currentTitle() {
       this.updateDisabled(); // Update disabled property based on current step
@@ -130,23 +202,5 @@ export default {
   },
 };
 </script>
-
-<script setup>
-import Form from "../components/Form.vue";
-import FormApply from "../components/FormApply.vue";
-import FormSummary from "../components/FormSummary.vue";
-import FormDone from "../components/FormDone.vue";
-</script>
-
-<!-- <script lang="ts" setup>
-import { useVModel } from '@vueuse/core'
-
-const props = defineProps<{
-  modelValue: string
-}>()
-const emit = defineEmits(['update:modelValue'])
-
-const data = useVModel(props, 'modelValue', emit)
-</script> -->
 
 <style></style>
