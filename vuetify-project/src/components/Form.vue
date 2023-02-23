@@ -1,5 +1,5 @@
 <template>
-  <v-form>
+  <v-form validate-on="submit">
     <v-container class="pa-2 rounded-sm align-items">
       <c-body body="Ange dina uppgifter" />
       <v-row variant="outlined">
@@ -12,14 +12,16 @@
             disabled></v-text-field>
         </v-row>
         <v-col cols="12" md="12">
-          <v-text-field label="E-post" type="email" prepend-inner-icon="mdi-email"
-            :rules="[(v) => !!v || 'E-post måste fyllas i']" 
-
-            v-model="formData.email"
-            hint="Skriv in din e-postadress (Denna text ska ändras)"
-            ></v-text-field>
+          <v-text-field label="E-post" type="email" prepend-inner-icon="mdi-email" v-model="formData.email"
+            hint="Skriv in din e-postadress."></v-text-field>
           <v-text-field label="Upprepa E-post" type="email" prepend-inner-icon="mdi-email"
-            hint="Skriv in samma e-postadress som ovan (Denna text ska ändras)"></v-text-field>
+            hint="Skriv in samma e-postadress som ovan."
+            ></v-text-field>
+
+          <v-text-field label="Telefonnummer" type="text" v-model="formData.phoneNumber" prepend-inner-icon="mdi-phone"
+            :rules="[
+              v => !!v || 'Field is required'
+            ]"></v-text-field>
         </v-col>
       </v-row>
 
@@ -27,20 +29,16 @@
         <v-col>
           <c-body body="Söker du som privatperson/enskild firma eller som ombud?" />
           <v-select prepend-inner-icon="mdi-form-select" placeholder="Jag söker som..." :items="applyChoice"
-          v-model="formData.apply"></v-select>
+            v-model="formData.apply" :rules="[
+        v => !!v || 'Field is required'
+      ]"></v-select>
         </v-col>
       </v-row>
       <v-container v-if="formData.apply === 'Jag söker som privatperson/enskild firma'">
         <v-container class="my-2">
           <c-body body="Kundnummer" />
-          <v-select label="Länsbokstav" 
-          item-title="name"
-           :items="items" 
-           prepend-inner-icon="mdi-format-letter-case"
-            return-object
-            v-model="formData.applyCounty"
-             
-             ></v-select>
+          <v-select label="Länsbokstav" item-title="name" :items="items" prepend-inner-icon="mdi-format-letter-case"
+            return-object v-model="formData.applyCounty"></v-select>
           <v-text-field type="text" label="Nummer" placeholder="XXXXXX" prepend-inner-icon="mdi-pound-box"
             hint="Ange de upp till 6 siffror som tillsammans med länsbokstaven utgör stödmottagarens kundnummer. Observera att kundnummer INTE är samma som produktionsplatsnummer (SE-nr)."
             v-model="formData.applyNumber"></v-text-field>
@@ -52,7 +50,6 @@
       <v-btn type="submit" size="large" color="success" width="200" variant="tonal">Submit</v-btn>
     </v-container>
   </v-form>
-
 </template>
 
 <script setup>
@@ -81,6 +78,12 @@ export default {
         "Jag söker som ombud för privatperson/enskild firma",
         "Jag söker som ombud för ett företag eller organisation",
       ],
+     /*  rules: [
+        value => {
+          if (value) return true
+          return 'You must enter an input.'
+        },
+      ], */
     };
   },
 };

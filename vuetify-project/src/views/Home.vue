@@ -40,7 +40,7 @@
           </v-window-item>
 
           <v-window-item :value="2">
-            <FormApply :formData="formData" />
+            <FormApply />
           </v-window-item>
 
           <v-window-item :value="3">
@@ -69,6 +69,7 @@ const formData = reactive({
   lastname: "Doe",
   ssn: "12456-1234",
   email: "",
+  phoneNumber: "",
   apply: "",
   applyCounty: "",
   applyNumber: "",

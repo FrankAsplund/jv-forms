@@ -1,10 +1,7 @@
 <template>
     <v-container>
         <v-form>
-            <div class="mt-2 mb-8">
-                <div class="text-h5">Produktion</div>
-            </div>
-
+            <c-body body="Produktion" />
             <div>
                 <v-hover v-slot="{ isHovering, props }">
                     <v-card class="w-75 h-75 my-4" v-bind="props" :color="isHovering ? 'light-green-lighten-5' : undefined">
@@ -78,6 +75,13 @@
         </v-form>
 </v-container>
 </template>
+
+<script setup>
+const props = defineProps({
+  formDataApply: Object,
+});
+</script>
+
 
 <script>
 import cHeader from "./form-components/c-header.vue";
