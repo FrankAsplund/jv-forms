@@ -36,11 +36,11 @@
 
         <v-window v-model="step" class="mx-12">
           <v-window-item :value="1">
-            <Form @submit.prevent="submitForm" />
+             <Form :formData="formData" @submit.prevent="submitForm" />
           </v-window-item>
 
           <v-window-item :value="2">
-            <FormApply />
+            <FormApply :formData="formData" />
           </v-window-item>
 
           <v-window-item :value="3">
@@ -61,24 +61,25 @@ import Form from "../components/Form.vue";
 import FormApply from "../components/FormApply.vue";
 import FormSummary from "../components/FormSummary.vue";
 import FormDone from "../components/FormDone.vue";
-
+import { reactive } from "vue";
 import axios from "axios";
 
-async function submitForm() {
-  const formData = {
-    firstname: "John",
-    lastname: "Doe",
-    ssn: "12456-1234",
-    email: this.email,
-    apply: this.apply,
-    applyCounty: this.applyCounty,
-    applyNumber: this.applyNumber,
-  };
+const formData = reactive({
+  firstname: "John",
+  lastname: "Doe",
+  ssn: "12456-1234",
+  email: "",
+  apply: "",
+  applyCounty: "",
+  applyNumber: "",
+});
 
+async function submitForm() {
+  const data = { ...formData };
   try {
     const response = await axios.post(
       "https://dummy.restapiexample.com/api/v1/create",
-      formData,
+      data,
       {
         headers: {
           "Content-Type": "application/json",
@@ -86,7 +87,6 @@ async function submitForm() {
       }
     );
 
-    /* this.response = response.data; */
     console.log(response.data);
     document.forms[0].reset();
   } catch (error) {
@@ -125,16 +125,6 @@ export default {
           disabled: true,
         },
       ],
-
-      formData: {
-        firstname: "John",
-        lastname: "Doe",
-        ssn: "12456-1234",
-        email: "",
-        apply: "",
-        applyCounty: "",
-        applyNumber: "",
-      },
     };
   },
 
@@ -146,51 +136,6 @@ export default {
     },
   },
 
-  /* async submitForm() {
-      const formData = {
-        name: this.name,
-        email: this.email,
-        apply: this.apply,
-        applyCounty: this.applyCounty,
-        applyNumber: this.applyNumber,
-      };
-
-      const response = await fetch('https://dummy.restapiexample.com/api/v1/create', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-      });
-
-      if (response.ok) {
-
-      } else {
-
-      }
-    }, */
-
-  /* submitForm() {
-      var config = {
-        method: "POST",
-        url: "https://dummy.restapiexample.com/api/v1/create",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        data: JSON.stringify(this.formData),
-      };
-
-      axios(config)
-        .then((response) => {
-          this.response = JSON.stringify(response.data);
-          console.log(JSON.stringify(response.data));
-          document.forms[0].reset();
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
-  }, */
   computed: {
     currentTitle() {
       this.updateDisabled(); // Update disabled property based on current step
