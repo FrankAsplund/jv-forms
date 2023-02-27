@@ -10,8 +10,9 @@
             :color="isHovering ? 'light-green-lighten-5' : undefined"
           >
             <v-checkbox
-              v-model:if="productionType"
-              v-model:form="formDataApply.productionType"
+              :value="formDataApply.productionType"
+              @input="$emit('update:productionType', $event.target.value)"
+              v-model="productionType"
               label="Jag söker krisstöd för min fjäderfäproduktion"
               color="success"
               hide-details
@@ -138,11 +139,14 @@
 </template>
 
 <script setup>
-const props = defineProps({
-  formDataApply: Object,
+import { useVModel } from "@vueuse/core";
+
+defineProps({
+  formDataApplyObj: Object,
 });
 
-/* defineEmits(["update:formDataApply"]); */
+const emit = defineEmits(["update:modelValue", "update:formDataApply"]);
+const formDataApply = useVModel(props, "formDataApply", emit);
 </script>
 
 <script>

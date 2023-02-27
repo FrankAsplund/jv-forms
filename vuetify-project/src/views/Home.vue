@@ -36,11 +36,17 @@
 
         <v-window v-model="step" class="mx-12">
           <v-window-item :value="1">
-             <Form :formData="formData" @submit.prevent="submitForm" />
+            <Form
+              :value="formData"
+              @update:modelValue="(newValue) => (formData.value = newValue)"
+            />
           </v-window-item>
 
           <v-window-item :value="2">
-            <FormApply />
+            <FormApply
+              :formDataApply="formDataApply"
+              @submit.prevent="submitForm"
+            />
           </v-window-item>
 
           <v-window-item :value="3">
@@ -70,13 +76,17 @@ const formData = reactive({
   ssn: "12456-1234",
   email: "",
   phoneNumber: "",
-  apply: "",
+  applyChoice: "",
   applyCounty: "",
   applyNumber: "",
 });
 
+const formDataApply = reactive({
+  productionType: "",
+});
+
 async function submitForm() {
-  const data = { ...formData };
+  const data = { ...formData, FormApply: formDataApply };
   try {
     const response = await axios.post(
       "https://dummy.restapiexample.com/api/v1/create",
