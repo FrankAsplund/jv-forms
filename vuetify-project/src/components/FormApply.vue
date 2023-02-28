@@ -10,9 +10,7 @@
             :color="isHovering ? 'light-green-lighten-5' : undefined"
           >
             <v-checkbox
-              :value="formDataApply.productionType"
-              @input="$emit('update:productionType', $event.target.value)"
-              v-model="productionType"
+              v-model="formDataApply.productionType"
               label="Jag söker krisstöd för min fjäderfäproduktion"
               color="success"
               hide-details
@@ -21,7 +19,7 @@
         </v-hover>
       </div>
 
-      <v-container v-if="productionType">
+      <v-container v-if="formDataApply.productionType">
         <v-container>
           <v-checkbox
             label="Hönsproduktion"
@@ -53,7 +51,7 @@
 
             <v-text-field
               label="Total summa"
-              v-model="totalHens"
+              v-model="formDataApply.totalHens"
               readonly
               prepend-icon="mdi-equal-box"
             ></v-text-field>
@@ -61,7 +59,7 @@
         </v-container>
       </v-container>
 
-      <v-container v-if="productionType">
+      <v-container v-if="formDataApply.productionType">
         <v-container>
           <v-checkbox
             label="Kalkonproduktion"
@@ -69,7 +67,7 @@
             v-model="showTurkeys"
             hide-details
           />
-          <v-card class="w-100 h-75 my-4" v-if="showTurkeys">
+          <v-card class="w-100 h-75 my-4" v-if="formDataApply.showTurkeys">
             <v-text-field
               v-model="field4"
               label="Ange genomsnittligt antal kalkoner över 24 veckor i din besättning 2023"
@@ -90,7 +88,7 @@
 
             <v-text-field
               label="Total summa"
-              v-model="totalTurkeys"
+              v-model="formDataApply.totalTurkeys"
               readonly
               prepend-icon="mdi-equal-box"
             >
@@ -134,6 +132,16 @@
           Lägg till produktionsplats
         </v-btn>
       </v-container>
+      <v-container class="d-flex justify-center mx-2">
+        <v-btn
+          type="submit"
+          size="large"
+          color="success"
+          width="200"
+          variant="tonal"
+          >Submit</v-btn
+        >
+      </v-container>
     </v-form>
   </v-container>
 </template>
@@ -142,11 +150,39 @@
 import { useVModel } from "@vueuse/core";
 
 defineProps({
-  formDataApplyObj: Object,
+  formDataApplyObj: {
+    type: Object,
+    default: () => ({
+      productionType: false,
+      showHens: false,
+      field1: null,
+      field2: null,
+      field3: null,
+      showTurkeys: false,
+      field4: null,
+      field5: null,
+      field6: null,
+      productPlaceFields: [],
+    }),
+  },
 });
 
-const emit = defineEmits(["update:modelValue", "update:formDataApply"]);
+const emit = defineEmits(["update:modelValue", "update:formDataApplyObj"]);
 const formDataApply = useVModel(props, "formDataApply", emit);
+
+const totalHens = computed(
+  () =>
+    Number(props.formDataApply.field1) +
+    Number(props.formDataApply.field2) +
+    Number(props.formDataApply.field3)
+);
+
+const totalTurkeys = computed(
+  () =>
+    Number(props.formDataApply.field4) +
+    Number(props.formDataApply.field5) +
+    Number(props.formDataApply.field6)
+);
 </script>
 
 <script>
@@ -160,7 +196,7 @@ export default {
   },
   data() {
     return {
-      productionType: false,
+      /* productionType: false,
       showHens: false,
       field1: null,
       field2: null,
@@ -169,7 +205,7 @@ export default {
       field4: null,
       field5: null,
       field6: null,
-      productPlaceFields: [],
+      productPlaceFields: [], */
     };
   },
   computed: {

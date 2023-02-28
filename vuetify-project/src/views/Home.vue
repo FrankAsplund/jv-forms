@@ -36,15 +36,12 @@
 
         <v-window v-model="step" class="mx-12">
           <v-window-item :value="1">
-            <Form
-              :value="formData"
-              @update:modelValue="(newValue) => (formData.value = newValue)"
-            />
+            <Form v-model="formData" />
           </v-window-item>
 
           <v-window-item :value="2">
             <FormApply
-              :formDataApply="formDataApply"
+              v-model:formDataApplyObj="formDataApply"
               @submit.prevent="submitForm"
             />
           </v-window-item>
@@ -76,17 +73,28 @@ const formData = reactive({
   ssn: "12456-1234",
   email: "",
   phoneNumber: "",
-  applyChoice: "",
+  apply: "",
   applyCounty: "",
   applyNumber: "",
 });
 
 const formDataApply = reactive({
-  productionType: "",
+  productionType: false,
+  showHens: false,
+  field1: null,
+  field2: null,
+  field3: null,
+  showTurkeys: false,
+  field4: null,
+  field5: null,
+  field6: null,
+  productPlaceFields: [],
 });
 
 async function submitForm() {
   const data = { ...formData, FormApply: formDataApply };
+
+  console.log(formDataApply);
   try {
     const response = await axios.post(
       "https://dummy.restapiexample.com/api/v1/create",
@@ -135,6 +143,11 @@ export default {
           title: "Klar",
           disabled: true,
         },
+      ],
+      applyChoice: [
+        "Jag söker som privatperson/enskild firma",
+        "Jag söker som ombud för privatperson/enskild firma",
+        "Jag söker som ombud för ett företag eller organisation",
       ],
     };
   },

@@ -31,7 +31,7 @@
             label="E-post"
             type="email"
             prepend-inner-icon="mdi-email"
-            v-model="formDataObj.email"
+            v-model="formData.email"
             hint="Skriv in din e-postadress."
           ></v-text-field>
           <v-text-field
@@ -44,7 +44,7 @@
           <v-text-field
             label="Telefonnummer"
             type="text"
-            v-model="formDataObj.phoneNumber"
+            v-model="formData.phoneNumber"
             prepend-inner-icon="mdi-phone"
             :rules="[(v) => !!v || 'Field is required']"
           ></v-text-field>
@@ -60,15 +60,14 @@
             prepend-inner-icon="mdi-form-select"
             placeholder="Jag söker som..."
             :items="applyChoice"
-            v-model="formDataObj.applyChoice"
+            v-model="formData.apply"
             :rules="[(v) => !!v || 'Field is required']"
+            return-object
           ></v-select>
         </v-col>
       </v-row>
       <v-container
-        v-if="
-          formDataObj.applyChoice === 'Jag söker som privatperson/enskild firma'
-        "
+        v-if="formData.apply === 'Jag söker som privatperson/enskild firma'"
       >
         <v-container class="my-2">
           <c-body body="Kundnummer" />
@@ -78,7 +77,7 @@
             :items="items"
             prepend-inner-icon="mdi-format-letter-case"
             return-object
-            v-model="formDataObj.applyCounty"
+            v-model="formData.applyCounty"
           ></v-select>
           <v-text-field
             type="text"
@@ -86,21 +85,10 @@
             placeholder="XXXXXX"
             prepend-inner-icon="mdi-pound-box"
             hint="Ange de upp till 6 siffror som tillsammans med länsbokstaven utgör stödmottagarens kundnummer. Observera att kundnummer INTE är samma som produktionsplatsnummer (SE-nr)."
-            v-model="formDataObj.applyNumber"
+            v-model="formData.applyNumber"
           ></v-text-field>
         </v-container>
       </v-container>
-    </v-container>
-
-    <v-container class="d-flex justify-center mx-2">
-      <v-btn
-        type="submit"
-        size="large"
-        color="success"
-        width="200"
-        variant="tonal"
-        >Submit</v-btn
-      >
     </v-container>
   </v-form>
 </template>
@@ -112,11 +100,27 @@ import items from "./form-components/counties.js";
 import { useVModel } from "@vueuse/core";
 
 const props = defineProps({
-  formData: Object,
+  formDataObj: Object,
 });
 
+/* const props = defineProps({
+  formDataObj: {
+    type: Object,
+    default: () => ({
+      firstname: "John",
+      lastname: "Doe",
+      ssn: "12456-1234",
+      email: "",
+      phoneNumber: "",
+      apply: "",
+      applyCounty: "",
+      applyNumber: "",
+    }),
+  },
+}); */
+
 const emit = defineEmits(["update:modelValue", "update:formDataObj"]);
-const formDataObj = useVModel(props, "formData", emit);
+const formData = useVModel(props, "formData", emit);
 </script>
 
 <script>
@@ -135,12 +139,6 @@ export default {
         "Jag söker som ombud för privatperson/enskild firma",
         "Jag söker som ombud för ett företag eller organisation",
       ],
-      /*  rules: [
-        value => {
-          if (value) return true
-          return 'You must enter an input.'
-        },
-      ], */
     };
   },
 };
