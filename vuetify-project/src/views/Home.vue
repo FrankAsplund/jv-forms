@@ -34,9 +34,19 @@
           ></v-btn>
         </v-card-actions>
 
+        <!-- :formData="formData"
+          :formDataApplyObj="formDataApplyObj"
+
+
+          v-model:formDataObj="formData" 
+          v-model:formDataApplyObj="formDataApply"
+
+          @submit.prevent="submitForm"
+         -->
+
         <v-window v-model="step" class="mx-12">
           <v-window-item :value="1">
-            <Form v-model="formData" />
+            <Form v-model:formDataObj="formData" />
           </v-window-item>
 
           <v-window-item :value="2">
@@ -79,22 +89,16 @@ const formData = reactive({
 });
 
 const formDataApply = reactive({
-  productionType: false,
-  showHens: false,
-  field1: null,
-  field2: null,
-  field3: null,
-  showTurkeys: false,
-  field4: null,
-  field5: null,
-  field6: null,
-  productPlaceFields: [],
+  productionType: undefined,
+  showHens: undefined,
+  showTurkeys: undefined,
 });
 
 async function submitForm() {
-  const data = { ...formData, FormApply: formDataApply };
+  const data = { ...formData };
 
-  console.log(formDataApply);
+  console.log(formData);
+  /* console.log(formDataApply); */
   try {
     const response = await axios.post(
       "https://dummy.restapiexample.com/api/v1/create",
@@ -143,11 +147,6 @@ export default {
           title: "Klar",
           disabled: true,
         },
-      ],
-      applyChoice: [
-        "Jag söker som privatperson/enskild firma",
-        "Jag söker som ombud för privatperson/enskild firma",
-        "Jag söker som ombud för ett företag eller organisation",
       ],
     };
   },

@@ -98,12 +98,19 @@ import cHeader from "./form-components/c-header.vue";
 import cBody from "./form-components/c-body.vue";
 import items from "./form-components/counties.js";
 import { useVModel } from "@vueuse/core";
-
-const props = defineProps({
-  formDataObj: Object,
-});
+import { defineProps } from "vue";
 
 /* const props = defineProps({
+  formDataObj: Object,
+}); */
+
+/* const props = defineProps({
+    formDataObj: {
+        type: Object,
+    }
+}); */
+
+const props = defineProps({
   formDataObj: {
     type: Object,
     default: () => ({
@@ -117,10 +124,15 @@ const props = defineProps({
       applyNumber: "",
     }),
   },
-}); */
+});
 
-const emit = defineEmits(["update:modelValue", "update:formDataObj"]);
-const formData = useVModel(props, "formData", emit);
+const emit = defineEmits(["update:modelValue", "update:formData"]);
+const formData = useVModel(props, "formDataObj", emit);
+
+/* emit("update:formData", "newvalue"); */
+
+/* const value = props.modelValue; */
+console.log(props.formDataObj); // 'test'
 </script>
 
 <script>
