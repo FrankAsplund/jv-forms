@@ -2,151 +2,75 @@
   <v-form validate-on="submit">
     <v-container class="pa-2 rounded-sm align-items">
       <c-body body="Produktion" />
-      <v-checkbox
-        v-model="formDataApply.productionType"
-        label="Jag söker krisstöd för min fjäderfäproduktion"
-        color="success"
-        hide-details
-      />
-
-      <!-- <v-hover v-slot="{ isHovering, props }">
-        <v-card
-          class="w-75 h-75 my-4"
-          v-bind="props"
-          :color="isHovering ? 'light-green-lighten-5' : undefined"
-        >
-          <v-checkbox
-            v-model="formDataApply.productionType"
-            label="Jag söker krisstöd för min fjäderfäproduktion"
-            color="success"
-            hide-details
-          />
+      <v-hover v-slot="{ isHovering, props }">
+        <v-card class="w-75 h-75 my-4" v-bind="props" :color="isHovering ? 'light-green-lighten-5' : undefined">
+          <v-checkbox v-model="formDataApply.productionType" label="Jag söker krisstöd för min fjäderfäproduktion"
+            color="success" hide-details />
         </v-card>
-      </v-hover> -->
+      </v-hover>
 
       <v-container v-if="formDataApply.productionType">
         <v-container>
-          <v-checkbox
-            label="Hönsproduktion"
-            color="success"
-            v-model="formDataApply.showHens"
-            hide-details
-          />
-          <v-card class="w-100 h-75 my-4" v-if="formDataApply.showHens">
-            <v-text-field
-              v-model="field1"
-              type="text"
+          <v-checkbox label="Hönsproduktion" color="success" v-model="showHens" hide-details />
+          <v-card class="w-100 h-75 my-4" v-if="showHens">
+            <v-text-field v-model="field1" type="text"
               label="Ange genomsnittlig antal höns äldre än 20 veckor i din besättning 2023"
-              prepend-icon="mdi-plus-box"
-            ></v-text-field>
+              prepend-icon="mdi-plus-box"></v-text-field>
 
-            <v-text-field
-              v-model="field2"
-              type="text"
+            <v-text-field v-model="field2" type="text"
               label="Ange antal slaktkycklingar i en normal uppfödningsomgång under år 2023"
-              prepend-icon="mdi-plus-box"
-            ></v-text-field>
+              prepend-icon="mdi-plus-box"></v-text-field>
 
-            <v-text-field
-              v-model="field3"
-              type="text"
+            <v-text-field v-model="field3" type="text"
               label="Ange genomsnittligt antal kycklingar för äggproduktion i din besättning 2023"
-              prepend-icon="mdi-plus-box"
-            ></v-text-field>
+              prepend-icon="mdi-plus-box"></v-text-field>
 
-            <v-text-field
-              label="Total summa"
-              v-model="totalHens"
-              readonly
-              prepend-icon="mdi-equal-box"
-            ></v-text-field>
+            <v-text-field label="Total summa" v-model="totalHens" readonly prepend-icon="mdi-equal-box"></v-text-field>
           </v-card>
         </v-container>
       </v-container>
 
       <v-container v-if="formDataApply.productionType">
         <v-container>
-          <v-checkbox
-            label="Kalkonproduktion"
-            color="success"
-            v-model="formDataApply.showTurkeys"
-            hide-details
-          />
-          <v-card class="w-100 h-75 my-4" v-if="formDataApply.showTurkeys">
-            <v-text-field
-              v-model="field4"
-              label="Ange genomsnittligt antal kalkoner över 24 veckor i din besättning 2023"
-              prepend-icon="mdi-plus-box"
-            ></v-text-field>
+          <v-checkbox label="Kalkonproduktion" color="success" v-model="showTurkeys" hide-details />
+          <v-card class="w-100 h-75 my-4" v-if="showTurkeys">
+            <v-text-field v-model="field4" label="Ange genomsnittligt antal kalkoner över 24 veckor i din besättning 2023"
+              prepend-icon="mdi-plus-box"></v-text-field>
 
-            <v-text-field
-              v-model="field5"
-              label="Ange antal slaktkalkoner i en normal uppfödningsomgång under år 2023"
-              prepend-icon="mdi-plus-box"
-            ></v-text-field>
+            <v-text-field v-model="field5" label="Ange antal slaktkalkoner i en normal uppfödningsomgång under år 2023"
+              prepend-icon="mdi-plus-box"></v-text-field>
 
-            <v-text-field
-              v-model="field6"
+            <v-text-field v-model="field6"
               label="Ange genomsnittligt antal kalkonkycklingar för äggproduktion i din besättning 2023"
-              prepend-icon="mdi-plus-box"
-            ></v-text-field>
+              prepend-icon="mdi-plus-box"></v-text-field>
 
-            <v-text-field
-              label="Total summa"
-              v-model="totalTurkeys"
-              readonly
-              prepend-icon="mdi-equal-box"
-            >
+            <v-text-field label="Total summa" v-model="totalTurkeys" readonly prepend-icon="mdi-equal-box">
             </v-text-field>
           </v-card>
         </v-container>
       </v-container>
 
-      <!--  <v-container class="productionplace-container">
-      <div class="text-subtitle-1">
-        Om du har dina kalkoner i en kommersiell verksamhet måste du ange
-        produktionsplats.
-      </div>
-      <v-text-field
-        label="Produktionsplatsnummer"
-        prefix="SE"
-        hint="Ange den/de produktionsplatser där du bedrev din produktion 2023. Varje nummer består av upp till 6 siffor."
-      >
-      </v-text-field>
-      <v-text-field
-        v-for="(field, index) in formDataApply.productPlaceFields"
-        :key="index"
-        :label="'Produktionsplatsnummer'"
-        prefix="SE"
-        v-model="field.value"
-      >
-        <template v-slot:append>
-          <v-icon
-            @click="removeProductionPlace(index)"
-            :style="{ color: 'red' }"
-            >mdi-delete</v-icon
-          >
-        </template>
-      </v-text-field>
-      <v-btn
-        @click="addProductionPlace"
-        prepend-icon="mdi-plus"
-        color="success"
-        class="my-4"
-      >
-        Lägg till produktionsplats
-      </v-btn>
-    </v-container> -->
+      <v-container class="productionplace-container">
+        <div class="text-subtitle-1">
+          Om du har dina kalkoner i en kommersiell verksamhet måste du ange
+          produktionsplats.
+        </div>
+        <v-text-field label="Produktionsplatsnummer" prefix="SE"
+          hint="Ange den/de produktionsplatser där du bedrev din produktion 2023. Varje nummer består av upp till 6 siffor.">
+        </v-text-field>
+        <v-text-field v-for="(field, index) in productPlaceFields" :key="index" :label="'Produktionsplatsnummer'"
+          prefix="SE" v-model="field.value">
+          <template v-slot:append>
+            <v-icon @click="removeProductionPlace(index)" :style="{ color: 'red' }">mdi-delete</v-icon>
+          </template>
+        </v-text-field>
+        <v-btn @click="addProductionPlace" prepend-icon="mdi-plus" color="success" class="my-4">
+          Lägg till produktionsplats
+        </v-btn>
+      </v-container>
 
       <v-container class="d-flex justify-center mx-2">
-        <v-btn
-          type="submit"
-          size="large"
-          color="success"
-          width="200"
-          variant="tonal"
-          >Submit</v-btn
-        >
+        <v-btn type="submit" size="large" color="success" width="200" variant="tonal">Submit</v-btn>
       </v-container>
     </v-container>
   </v-form>
@@ -155,28 +79,7 @@
 <script setup>
 import { useVModel } from "@vueuse/core";
 import { defineProps } from "vue";
-
-/* const props = defineProps({
-  formDataApplyObj: Object,
-}); */
-
-/* const props = defineProps({
-  formDataApplyObj: {
-    type: Object,
-    default: () => ({
-      productionType: false,
-      showHens: false,
-      field1: null,
-      field2: null,
-      field3: null,
-      showTurkeys: false,
-      field4: null,
-      field5: null,
-      field6: null,
-      productPlaceFields: [],
-    }),
-  },
-}); */
+import { computed } from 'vue'
 
 const props = defineProps({
   formDataApplyObj: {
@@ -185,19 +88,28 @@ const props = defineProps({
       productionType: false,
       showHens: false,
       showTurkeys: false,
-      /* productPlaceFields: [], */
+      totalHens: 0,
+      totalTurkeys: 0
     }),
   },
-  /* modelValue: String,
-  formData: String, */
 });
 
-/* emit("update:formData", "newvalue"); */
+/* const props = defineProps({
+  formDataApplyObj: {
+    productionTypeForm: "",
+      showHensForm: "",
+      showTurkeysForm: "",
+      totalHensForm: 0,
+      totalTurkeysForm: 0,
+    },
+  }); */
 
-const emit = defineEmits(["update:modelValue", "update:formDataApplyObj"]);
+
+const emit = defineEmits(["update:modelValue", "update:formDataApply"]);
 const formDataApply = useVModel(props, "formDataApplyObj", emit);
 
 console.log(props.formDataApplyObj); // 'test'
+
 
 const totalHens = computed(
   () =>
@@ -225,23 +137,29 @@ export default {
   },
   data() {
     return {
-      field1: null,
-      field2: null,
-      field3: null,
-      field4: null,
-      field5: null,
-      field6: null,
+      productionType: false,
+      showHens: false,
+      showTurkeys: false,
+      field1: 0,
+      field2: 0,
+      field3: 0,
+      field4: 0,
+      field5: 0,
+      field6: 0,
+      totalHens: 0,
+      totalTurkeys: 0,
       productPlaceFields: [],
     };
   },
-  /* computed: {
-    totalHens: function () {
-      return Number(this.field1) + Number(this.field2) + Number(this.field3);
-    },
-    totalTurkeys: function () {
-      return Number(this.field4) + Number(this.field5) + Number(this.field6);
-    },
-  }, */
+  /*   computed: {
+      totalHens: function () {
+        ((this.field1) + (this.field2) + (this.field3)) = formDataApply.totalHens;
+        return formDataApply.totalHens;
+      },
+      totalTurkeys: function () {
+        return Number(this.field4) + Number(this.field5) + Number(this.field6);
+      },
+    }, */
   methods: {
     addProductionPlace() {
       this.productPlaceFields.push({ value: "" });

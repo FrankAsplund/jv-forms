@@ -2,36 +2,20 @@
   <div class="d-flex bg-light-green-lighten-4 justify-center h-100">
     <v-container class="rounded mx-12">
       <v-card class="rounded-t-lg">
-        <v-toolbar
-          class="bg-light-blue-lighten-5 text-h5 font-weight-bold justify-center elevation-4"
-          dark
-        >
+        <v-toolbar class="bg-light-blue-lighten-5 text-h5 font-weight-bold justify-center elevation-4" dark>
           <v-breadcrumbs :items="items">
             <template v-slot:title="{ item }">
               {{ item.title }}
             </template>
           </v-breadcrumbs>
-          <v-toolbar-title class="text-h5 font-weight-bold"
-            >{{ currentTitle }}
+          <v-toolbar-title class="text-h5 font-weight-bold">{{ currentTitle }}
           </v-toolbar-title>
         </v-toolbar>
 
         <v-card-actions>
-          <v-btn
-            v-if="step > 1"
-            size="x-large"
-            icon="mdi-arrow-left-bold"
-            color="black"
-            @click="step--"
-          ></v-btn>
+          <v-btn v-if="step > 1" size="x-large" icon="mdi-arrow-left-bold" color="black" @click="step--"></v-btn>
           <v-spacer></v-spacer>
-          <v-btn
-            v-if="step < 4"
-            size="x-large"
-            icon="mdi-arrow-right-bold"
-            color="black"
-            @click="step++"
-          ></v-btn>
+          <v-btn v-if="step < 4" size="x-large" icon="mdi-arrow-right-bold" color="black" @click="step++"></v-btn>
         </v-card-actions>
 
         <!-- :formData="formData"
@@ -50,10 +34,7 @@
           </v-window-item>
 
           <v-window-item :value="2">
-            <FormApply
-              v-model:formDataApplyObj="formDataApply"
-              @submit.prevent="submitForm"
-            />
+            <FormApply v-model:formDataApplyObj="formDataApply" @submit.prevent="submitForm" />
           </v-window-item>
 
           <v-window-item :value="3">
@@ -89,16 +70,18 @@ const formData = reactive({
 });
 
 const formDataApply = reactive({
-  productionType: undefined,
-  showHens: undefined,
-  showTurkeys: undefined,
+  productionType: false,
+      showHens: false,
+      showTurkeys: false,
+      totalHens: 0,
+      totalTurkeys: 0
 });
 
 async function submitForm() {
-  const data = { ...formData };
+  const data = { ...formData, FormApply: formDataApply };
 
   console.log(formData);
-  /* console.log(formDataApply); */
+  console.log(formDataApply);
   try {
     const response = await axios.post(
       "https://dummy.restapiexample.com/api/v1/create",

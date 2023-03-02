@@ -100,16 +100,6 @@ import items from "./form-components/counties.js";
 import { useVModel } from "@vueuse/core";
 import { defineProps } from "vue";
 
-/* const props = defineProps({
-  formDataObj: Object,
-}); */
-
-/* const props = defineProps({
-    formDataObj: {
-        type: Object,
-    }
-}); */
-
 const props = defineProps({
   formDataObj: {
     type: Object,
@@ -129,9 +119,6 @@ const props = defineProps({
 const emit = defineEmits(["update:modelValue", "update:formData"]);
 const formData = useVModel(props, "formDataObj", emit);
 
-/* emit("update:formData", "newvalue"); */
-
-/* const value = props.modelValue; */
 console.log(props.formDataObj); // 'test'
 </script>
 
@@ -144,7 +131,6 @@ export default {
   name: "Form",
   data() {
     return {
-      show: false,
       items: items,
       applyChoice: [
         "Jag söker som privatperson/enskild firma",
