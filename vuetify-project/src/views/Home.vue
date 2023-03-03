@@ -34,11 +34,11 @@
           </v-window-item>
 
           <v-window-item :value="2">
-            <FormApply v-model:formDataApplyObj="formDataApply" @submit.prevent="submitForm" />
+            <FormApply v-model:formDataApplyObj="formDataApply" />
           </v-window-item>
 
           <v-window-item :value="3">
-            <FormSummary />
+            <FormSummary @submit-all="submitForm()" />
           </v-window-item>
 
           <v-window-item :value="4">
@@ -71,15 +71,17 @@ const formData = reactive({
 
 const formDataApply = reactive({
   productionType: false,
-      showHens: false,
-      showTurkeys: false,
-      totalHens: 0,
-      totalTurkeys: 0
+  showHens: false,
+  showTurkeys: false,
+  totalHens: 0,
+  totalTurkeys: 0,
+  productPlaceFields: [],
 });
 
 async function submitForm() {
   const data = { ...formData, FormApply: formDataApply };
 
+  formDataApply.productPlaceFields
   console.log(formData);
   console.log(formDataApply);
   try {

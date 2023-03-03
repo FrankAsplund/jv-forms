@@ -107,23 +107,23 @@
                     </div>
                 </template>
             </v-checkbox>
-            <div class="send-btn">
-                <v-btn v-bind:disabled="summaryCheckbox === false" color="success">
-                    Skicka in
-                </v-btn>
-            </div>
+            <v-btn @click="submit()">Submit</v-btn>
         </v-container>
     </v-form>
 </template>
 
-<script>
-export default {
-    data() {
-        return {
-            summaryCheckbox: false,
-        }
-    }
+<script setup>
+import { ref } from 'vue';
+
+
+const summaryCheckbox = ref(false);
+
+const emit = defineEmits(['submit-all'])
+
+const submit = () => {
+    emit("submit-all");
 }
+
 </script>
 
 <style scoped>

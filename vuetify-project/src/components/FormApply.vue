@@ -40,7 +40,7 @@
             <v-text-field v-model="field5" label="Ange antal slaktkalkoner i en normal uppfödningsomgång under år 2023"
               prepend-icon="mdi-plus-box"></v-text-field>
 
-            <v-text-field v-model="field6"
+            <v-text-field v-model="average"
               label="Ange genomsnittligt antal kalkonkycklingar för äggproduktion i din besättning 2023"
               prepend-icon="mdi-plus-box"></v-text-field>
 
@@ -58,8 +58,8 @@
         <v-text-field label="Produktionsplatsnummer" prefix="SE"
           hint="Ange den/de produktionsplatser där du bedrev din produktion 2023. Varje nummer består av upp till 6 siffor.">
         </v-text-field>
-        <v-text-field v-for="(field, index) in productPlaceFields" :key="index" :label="'Produktionsplatsnummer'"
-          prefix="SE" v-model="field.value">
+        <v-text-field v-for="(field, index) in formDataApply.productPlaceFields" :key="index"
+          :label="'Produktionsplatsnummer'" prefix="SE" v-model="field.value">
           <template v-slot:append>
             <v-icon @click="removeProductionPlace(index)" :style="{ color: 'red' }">mdi-delete</v-icon>
           </template>
@@ -70,7 +70,6 @@
       </v-container>
 
       <v-container class="d-flex justify-center mx-2">
-        <v-btn type="submit" size="large" color="success" width="200" variant="tonal">Submit</v-btn>
       </v-container>
     </v-container>
   </v-form>
@@ -89,24 +88,25 @@ const props = defineProps({
       showHens: false,
       showTurkeys: false,
       totalHens: 0,
-      totalTurkeys: 0
+      totalTurkeys: 0,
+      productPlaceFields: []
     }),
   },
 });
 
-/* const props = defineProps({
-  formDataApplyObj: {
-    productionTypeForm: "",
-      showHensForm: "",
-      showTurkeysForm: "",
-      totalHensForm: 0,
-      totalTurkeysForm: 0,
-    },
-  }); */
+
 
 
 const emit = defineEmits(["update:modelValue", "update:formDataApply"]);
 const formDataApply = useVModel(props, "formDataApplyObj", emit);
+
+function addProductionPlace() {
+  formDataApply.value.productPlaceFields.push({ value: "" });
+};
+
+function removeProductionPlace(index) {
+  formDataApply.value.productPlaceFields.splice(index, 1);
+};
 
 console.log(props.formDataApplyObj); // 'test'
 
@@ -150,24 +150,7 @@ export default {
       totalTurkeys: 0,
       productPlaceFields: [],
     };
-  },
-  /*   computed: {
-      totalHens: function () {
-        ((this.field1) + (this.field2) + (this.field3)) = formDataApply.totalHens;
-        return formDataApply.totalHens;
-      },
-      totalTurkeys: function () {
-        return Number(this.field4) + Number(this.field5) + Number(this.field6);
-      },
-    }, */
-  methods: {
-    addProductionPlace() {
-      this.productPlaceFields.push({ value: "" });
-    },
-    removeProductionPlace(index) {
-      this.productPlaceFields.splice(index, 1);
-    },
-  },
+  }
 };
 </script>
 
