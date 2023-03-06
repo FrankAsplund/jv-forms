@@ -18,31 +18,31 @@
                     <thead>
                         <tr>
                             <th class="text-left">Förnamn</th>
-                            <th class="text-right">Daniel</th>
+                            <th class="text-right"> {{  formData.firstname }}</th>
                         </tr>
                         <tr>
                             <th class="text-left">Efternamn</th>
-                            <th class="text-right">Bladh Stenberg</th>
+                            <th class="text-right"> {{ formData.lastname }}</th>
                         </tr>
                         <tr>
                             <th class="text-left">Personnummer</th>
-                            <th class="text-right">1992-10-18-XXXX</th>
+                            <th class="text-right"> {{ formData.ssn }}</th>
                         </tr>
                         <tr>
-                            <th class="text-left">Jag ansöker som:</th>
-                            <th class="text-right">Privatperson</th>
+                            <th class="text-left">Epost address</th>
+                            <th class="text-right"> {{ formData.email }}</th>
                         </tr>
                         <tr>
-                            <th class="text-left">Länsbokstav</th>
-                            <th class="text-right">AB-Stockholm</th>
+                            <th class="text-left">Telefonnummer</th>
+                            <th class="text-right">{{ formData.phoneNumber }}</th>
                         </tr>
                         <tr>
-                            <th class="text-left">Nummer</th>
-                            <th class="text-right">XXXXXX</th>
+                            <th class="text-left">Jag söker som</th>
+                            <th class="text-right">{{ formData.apply }}</th>
                         </tr>
                         <tr>
-                            <th class="text-left">E-post</th>
-                            <th class="text-right">daniel@onify.co</th>
+                            <th class="text-left">Länsnummer</th>
+                            <th class="text-right">{{ formData.applyCounty }}</th>
                         </tr>
                     </thead>
                 </v-table>
@@ -113,7 +113,23 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, reactive, onMounted, onUpdated } from 'vue';
+
+const formData = reactive({
+  firstname: "John",
+  lastname: "Doe",
+  ssn: "12456-1234",
+  email: "",
+  phoneNumber: "",
+  apply: "",
+  applyCounty: "",
+  applyNumber: "",
+});
+
+onMounted (() => {
+    console.log(formData);
+})
+
 
 
 const summaryCheckbox = ref(false);
@@ -122,6 +138,30 @@ const emit = defineEmits(['submit-all'])
 
 const submit = () => {
     emit("submit-all");
+}
+
+async function submitForm() {
+  const data = { ...formData, FormApply: formDataApply };
+
+  formDataApply.productPlaceFields
+  console.log(formData);
+  console.log(formDataApply);
+  try {
+    const response = await axios.get(
+      "https://dummy.restapiexample.com/api/v1/create",
+      data,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    console.log(response.data);
+    document.forms[0].reset();
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 </script>

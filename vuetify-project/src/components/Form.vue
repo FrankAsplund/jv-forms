@@ -48,6 +48,7 @@ import cHeader from "./form-components/c-header.vue";
 import cBody from "./form-components/c-body.vue";
 import items from "./form-components/counties.js";
 import { useVModel } from "@vueuse/core";
+import { reactive } from "vue"
 
 
 const props = defineProps({
@@ -66,30 +67,16 @@ const props = defineProps({
   },
 });
 
+const applyChoice = reactive([
+  "Jag söker som privatperson/enskild firma",
+  "Jag söker som ombud för privatperson/enskild firma",
+  "Jag söker som ombud för ett företag eller organisation",
+])
+
 const emit = defineEmits(["update:modelValue", "update:formData"]);
 const formData = useVModel(props, "formDataObj", emit);
 
 console.log(props.formDataObj); // 'test'
-</script>
-
-<script>
-export default {
-  components: {
-    cHeader: cHeader,
-    cBody: cBody,
-  },
-  name: "Form",
-  data() {
-    return {
-      items: items,
-      applyChoice: [
-        "Jag söker som privatperson/enskild firma",
-        "Jag söker som ombud för privatperson/enskild firma",
-        "Jag söker som ombud för ett företag eller organisation",
-      ],
-    };
-  },
-};
 </script>
 
 <style>
