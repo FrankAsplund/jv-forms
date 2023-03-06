@@ -8,7 +8,7 @@
               {{ item.title }}
             </template>
           </v-breadcrumbs>
-          <v-toolbar-title class="text-h5 font-weight-bold">{{ currentTitle }}
+          <v-toolbar-title class="text-h5 font-weight-bold">
           </v-toolbar-title>
         </v-toolbar>
 
@@ -17,16 +17,6 @@
           <v-spacer></v-spacer>
           <v-btn v-if="step < 4" size="x-large" icon="mdi-arrow-right-bold" color="black" @click="step++"></v-btn>
         </v-card-actions>
-
-        <!-- :formData="formData"
-          :formDataApplyObj="formDataApplyObj"
-
-
-          v-model:formDataObj="formData" 
-          v-model:formDataApplyObj="formDataApply"
-
-          @submit.prevent="submitForm"
-         -->
 
         <v-window v-model="step" class="mx-12">
           <v-window-item :value="1">
@@ -38,7 +28,7 @@
           </v-window-item>
 
           <v-window-item :value="3">
-            <FormSummary @submit-all="submitForm()" />
+            <FormSummary v-model:formDataObj="formData" v-model:formDataApplyObj="formDataApply" @submit-all="submitForm()" />
           </v-window-item>
 
           <v-window-item :value="4">
@@ -55,7 +45,7 @@ import Form from "../components/Form.vue";
 import FormApply from "../components/FormApply.vue";
 import FormSummary from "../components/FormSummary.vue";
 import FormDone from "../components/FormDone.vue";
-import { reactive } from "vue";
+import { reactive, watchEffect, ref, computed } from "vue";
 import axios from "axios";
 
 const formData = reactive({
@@ -77,6 +67,35 @@ const formDataApply = reactive({
   totalTurkeys: 0,
   productPlaceFields: [],
 });
+
+const step = ref(1);
+
+const items = reactive([
+  {
+    title: "Grunduppgifter",
+    disabled: false,
+  },
+  {
+    title: "Ansökan",
+    disabled: true,
+  },
+  {
+    title: "Summering",
+    disabled: true,
+  },
+  {
+    title: "Klar",
+    disabled: true,
+  },
+]);
+
+function updateDisabled() {
+  items.forEach((item, index) => {
+    item.disabled = index !== step.value - 1;
+  });
+}
+
+watchEffect(updateDisabled);
 
 async function submitForm() {
   const data = { ...formData, FormApply: formDataApply };
@@ -101,59 +120,6 @@ async function submitForm() {
     console.log(error);
   }
 }
-</script>
-
-<script>
-export default {
-  components: {
-    Form,
-    FormApply,
-    FormSummary,
-    FormDone,
-  },
-  name: "Home",
-  data() {
-    return {
-      step: 1,
-      items: [
-        {
-          title: "Grunduppgifter",
-          disabled: false,
-        },
-        {
-          title: "Ansökan",
-          disabled: true,
-        },
-        {
-          title: "Summering",
-          disabled: true,
-        },
-        {
-          title: "Klar",
-          disabled: true,
-        },
-      ],
-    };
-  },
-
-  methods: {
-    updateDisabled() {
-      this.items.forEach((item, index) => {
-        item.disabled = index !== this.step - 1;
-      });
-    },
-  },
-
-  computed: {
-    currentTitle() {
-      this.updateDisabled(); // Update disabled property based on current step
-    },
-
-    currentItem() {
-      return this.items[this.step - 1];
-    },
-  },
-};
 </script>
 
 <style></style>

@@ -40,7 +40,7 @@
             <v-text-field v-model="field5" label="Ange antal slaktkalkoner i en normal uppfödningsomgång under år 2023"
               prepend-icon="mdi-plus-box"></v-text-field>
 
-            <v-text-field v-model="average"
+            <v-text-field v-model="field6"
               label="Ange genomsnittligt antal kalkonkycklingar för äggproduktion i din besättning 2023"
               prepend-icon="mdi-plus-box"></v-text-field>
 
