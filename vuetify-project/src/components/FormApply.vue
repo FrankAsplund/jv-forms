@@ -40,12 +40,11 @@
             <v-text-field v-model="field5" label="Ange antal slaktkalkoner i en normal uppfödningsomgång under år 2023"
               prepend-icon="mdi-plus-box"></v-text-field>
 
-            <v-text-field v-model="average"
+            <v-text-field v-model="field6"
               label="Ange genomsnittligt antal kalkonkycklingar för äggproduktion i din besättning 2023"
               prepend-icon="mdi-plus-box"></v-text-field>
 
-            <v-text-field label="Total summa" v-model="totalTurkeys" readonly prepend-icon="mdi-equal-box">
-            </v-text-field>
+            <v-text-field label="Total summa" v-model="totalTurkeys" readonly prepend-icon="mdi-equal-box"></v-text-field>
           </v-card>
         </v-container>
       </v-container>
@@ -77,8 +76,28 @@
 
 <script setup>
 import { useVModel } from "@vueuse/core";
-import { defineProps } from "vue";
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
+
+const field1 = ref(0);
+const field2 = ref(0);
+const field3 = ref(0);
+const field4 = ref(0);
+const field5 = ref(0);
+const field6 = ref(0);
+
+const totalHens = computed(
+  () =>
+    (Number(field1.value) +
+    Number(field2.value) +
+    Number(field3.value))
+);
+
+const totalTurkeys = computed(
+  () =>
+    (Number(field4.value) +
+    Number(field5.value) +
+    Number(field6.value))
+);
 
 const props = defineProps({
   formDataApplyObj: {
@@ -94,9 +113,6 @@ const props = defineProps({
   },
 });
 
-
-
-
 const emit = defineEmits(["update:modelValue", "update:formDataApply"]);
 const formDataApply = useVModel(props, "formDataApplyObj", emit);
 
@@ -109,21 +125,6 @@ function removeProductionPlace(index) {
 };
 
 console.log(props.formDataApplyObj); // 'test'
-
-
-const totalHens = computed(
-  () =>
-    Number(props.formDataApplyObj.field1) +
-    Number(props.formDataApplyObj.field2) +
-    Number(props.formDataApplyObj.field3)
-);
-
-const totalTurkeys = computed(
-  () =>
-    Number(props.formDataApplyObj.field4) +
-    Number(props.formDataApplyObj.field5) +
-    Number(props.formDataApplyObj.field6)
-);
 </script>
 
 <script>
@@ -140,13 +141,6 @@ export default {
       productionType: false,
       showHens: false,
       showTurkeys: false,
-      field1: 0,
-      field2: 0,
-      field3: 0,
-      field4: 0,
-      field5: 0,
-      field6: 0,
-      totalHens: 0,
       totalTurkeys: 0,
       productPlaceFields: [],
     };
