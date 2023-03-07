@@ -18,7 +18,7 @@
                     <thead>
                         <tr>
                             <th class="text-left">Förnamn</th>
-                            <th class="text-right"> {{  formData.firstname }}</th>
+                            <th class="text-right"> {{ formData.firstname }}</th>
                         </tr>
                         <tr>
                             <th class="text-left">Efternamn</th>
@@ -41,8 +41,12 @@
                             <th class="text-right">{{ formData.apply }}</th>
                         </tr>
                         <tr>
+                            <th class="text-left">Länsbokstav</th>
+                            <th class="text-right">{{ formData.applyCounty.name }}</th>
+                        </tr>
+                        <tr>
                             <th class="text-left">Länsnummer</th>
-                            <th class="text-right">{{ formData.applyCounty }}</th>
+                            <th class="text-right">{{ formData.applyNumber }}</th>
                         </tr>
                     </thead>
                 </v-table>
@@ -87,7 +91,7 @@
             </div>
         </div>
 
-        <v-container class="summaryConfirm" fluid>
+        <v-container class="summaryConfirmContainer" fluid>
             <div class="text-subtitle-1">Godkännande och försäkran</div>
             <v-checkbox v-model="summaryCheckbox" color="success">
                 <template v-slot:label>
@@ -107,7 +111,9 @@
                     </div>
                 </template>
             </v-checkbox>
-            <v-btn @click="submit()">Submit</v-btn>
+            <div class="send-btn" v-if="summaryCheckbox">
+                <v-btn @click="submit()" color="success">Skicka in</v-btn>
+            </div>
         </v-container>
     </v-form>
 </template>
@@ -116,12 +122,12 @@
 import { ref } from 'vue';
 
 const props = defineProps({
-  formData: {
-    type: Object,
-  },
-  formDataApply: {
-    type: Object,
-  },
+    formData: {
+        type: Object,
+    },
+    formDataApply: {
+        type: Object,
+    },
 });
 
 const summaryCheckbox = ref(false);
@@ -140,21 +146,18 @@ const submit = () => {
     padding: 10px;
 }
 
-.summaryConfirm {
+.summaryConfirmContainer {
     margin: auto;
-    width: 50%;
+    width: 70%;
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
     padding: 10px;
     margin-bottom: 0.5rem;
 }
 
-.send-btn {
-    text-align: center;
-}
-
 .flex-container {
     display: flex;
     margin-bottom: 2rem;
+    width: 100%;
 }
 
 .flex-child {
