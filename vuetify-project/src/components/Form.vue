@@ -34,7 +34,7 @@
           <c-body body="Kundnummer" />
           <v-select label="Länsbokstav" item-title="name" :items="items" prepend-inner-icon="mdi-format-letter-case"
             return-object v-model="formData.applyCounty"></v-select>
-          <v-text-field type="text" label="Nummer" placeholder="XXXXXX" prepend-inner-icon="mdi-pound-box"
+          <v-text-field type="text" label="Nummer" placeholder="XX-XXXXX" prepend-inner-icon="mdi-pound-box"
             hint="Ange de upp till 6 siffror som tillsammans med länsbokstaven utgör stödmottagarens kundnummer. Observera att kundnummer INTE är samma som produktionsplatsnummer (SE-nr)."
             v-model="formData.applyNumber"></v-text-field>
         </v-container>
