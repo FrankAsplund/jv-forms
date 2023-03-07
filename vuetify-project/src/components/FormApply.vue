@@ -2,16 +2,17 @@
   <v-form validate-on="submit">
     <v-container class="pa-2 rounded-sm align-items">
       <c-body body="Produktion" />
+
       <v-hover v-slot="{ isHovering, props }">
         <v-card class="w-75 h-75 my-4" v-bind="props" :color="isHovering ? 'light-green-lighten-5' : undefined">
-          <v-checkbox v-model="formDataApply.productionType" label="Jag söker krisstöd för min fjäderfäproduktion"
-            color="success" hide-details />
+          <v-checkbox v-model="formDataApply.areal" label="Jag söker krisstöd för areal" color="success" hide-details />
         </v-card>
       </v-hover>
 
       <v-hover v-slot="{ isHovering, props }">
         <v-card class="w-75 h-75 my-4" v-bind="props" :color="isHovering ? 'light-green-lighten-5' : undefined">
-          <v-checkbox v-model="formDataApply.areal" label="Jag söker krisstöd för areal" color="success" hide-details />
+          <v-checkbox v-model="formDataApply.productionType" label="Jag söker krisstöd för min fjäderfäproduktion"
+            color="success" hide-details />
         </v-card>
       </v-hover>
 
@@ -139,10 +140,10 @@ console.log(props.formDataApplyObj); // 'test'
 </script>
 
 <style scoped>
-
 .v-container {
   padding: 2px !important;
 }
+
 .productionplace-container {
   margin-top: 5rem;
 }
