@@ -60,12 +60,17 @@ const formData = reactive({
 });
 
 const formDataApply = reactive({
+  areal: false,
   productionType: false,
   averageHensOlderThan20WeeksThisYear: 0,
   averageChickensSlaughteredThisYear: 0,
   averageEggProducingChickensThisYear: 0,
-  /* totalHens: 0,
-  totalTurkeys: 0, */
+
+  averageTurkeysOlderThan24WeeksThisYear: 0,
+  averageTurkeysSlaughteredThisYear: 0,
+  averageEggProducingTurkeysThisYear: 0,
+  totalHens: 0,
+  totalTurkeys: 0,
   productPlaceFields: [],
 });
 
@@ -99,9 +104,10 @@ function updateDisabled() {
 watchEffect(updateDisabled);
 
 async function submitForm() {
-  const data = { ...formData, FormApply: formDataApply };
+  const data = { FormData: formData, FormApply: formDataApply };
 
-  /* formDataApply.totalHens = (formDataApply.field1 + formDataApply.field2 + formDataApply.field3); */
+  formDataApply.totalHens = (formDataApply.averageHensOlderThan20WeeksThisYear + formDataApply.averageChickensSlaughteredThisYear + formDataApply.averageEggProducingChickensThisYear);
+  formDataApply.totalTurkeys = (formDataApply.averageTurkeysOlderThan24WeeksThisYear + formDataApply.averageTurkeysSlaughteredThisYear + formDataApply.averageEggProducingTurkeysThisYear);
 
   formDataApply.productPlaceFields
   console.log(formData);

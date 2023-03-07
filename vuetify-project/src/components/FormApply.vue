@@ -9,6 +9,12 @@
         </v-card>
       </v-hover>
 
+      <v-hover v-slot="{ isHovering, props }">
+        <v-card class="w-75 h-75 my-4" v-bind="props" :color="isHovering ? 'light-green-lighten-5' : undefined">
+          <v-checkbox v-model="formDataApply.areal" label="Jag söker krisstöd för areal" color="success" hide-details />
+        </v-card>
+      </v-hover>
+
       <v-container v-if="formDataApply.productionType">
         <v-container>
           <v-checkbox label="Hönsproduktion" color="success" v-model="showHens" hide-details />
@@ -34,13 +40,15 @@
         <v-container>
           <v-checkbox label="Kalkonproduktion" color="success" v-model="showTurkeys" hide-details />
           <v-card class="w-100 h-75 my-4" v-if="showTurkeys">
-            <v-text-field v-model="field4" label="Ange genomsnittligt antal kalkoner över 24 veckor i din besättning 2023"
+            <v-text-field v-model.number="formDataApply.averageTurkeysOlderThan24WeeksThisYear"
+              label="Ange genomsnittligt antal kalkoner över 24 veckor i din besättning 2023"
               prepend-icon="mdi-plus-box"></v-text-field>
 
-            <v-text-field v-model="field5" label="Ange antal slaktkalkoner i en normal uppfödningsomgång under år 2023"
+            <v-text-field v-model.number="formDataApply.averageTurkeysSlaughteredThisYear"
+              label="Ange antal slaktkalkoner i en normal uppfödningsomgång under år 2023"
               prepend-icon="mdi-plus-box"></v-text-field>
 
-            <v-text-field v-model="field6"
+            <v-text-field v-model.number="formDataApply.averageEggProducingTurkeysThisYear"
               label="Ange genomsnittligt antal kalkonkycklingar för äggproduktion i din besättning 2023"
               prepend-icon="mdi-plus-box"></v-text-field>
 
@@ -75,40 +83,41 @@
 </template>
 
 <script setup>
+import cHeader from "./form-components/c-header.vue";
+import cBody from "./form-components/c-body.vue";
 import { useVModel } from "@vueuse/core";
-import { computed, ref } from 'vue'
+import { ref, computed } from 'vue'
 
-/* const field1 = ref(0);
-const field2 = ref(0);
-const field3 = ref(0); */
+const showHens = ref(false);
+const showTurkeys = ref(false);
 
-/* const field4 = ref(0);
-const field5 = ref(0);
-const field6 = ref(0); */
-
-/* const totalHens = computed(
+const totalHens = computed(
   () =>
-    (Number(field1.value) +
-    Number(field2.value) +
-    Number(field3.value))
-); */
+  (Number(props.formDataApplyObj.averageHensOlderThan20WeeksThisYear) +
+    Number(props.formDataApplyObj.averageChickensSlaughteredThisYear) +
+    Number(props.formDataApplyObj.averageEggProducingChickensThisYear))
+);
 
-/* const totalTurkeys = computed(
+const totalTurkeys = computed(
   () =>
-    (Number(field4.value) +
-    Number(field5.value) +
-    Number(field6.value))
-); */
+  (Number(props.formDataApplyObj.averageTurkeysOlderThan24WeeksThisYear) +
+    Number(props.formDataApplyObj.averageTurkeysSlaughteredThisYear) +
+    Number(props.formDataApplyObj.averageEggProducingTurkeysThisYear))
+);
 
 const props = defineProps({
   formDataApplyObj: {
     type: Object,
     default: () => ({
+      areal: false,
       productionType: false,
       averageHensOlderThan20WeeksThisYear: 0,
       averageChickensSlaughteredThisYear: 0,
       averageEggProducingChickensThisYear: 0,
 
+      averageTurkeysOlderThan24WeeksThisYear: 0,
+      averageTurkeysSlaughteredThisYear: 0,
+      averageEggProducingTurkeysThisYear: 0,
 
       productPlaceFields: []
     }),
@@ -127,26 +136,6 @@ function removeProductionPlace(index) {
 };
 
 console.log(props.formDataApplyObj); // 'test'
-</script>
-
-<script>
-import cHeader from "./form-components/c-header.vue";
-import cBody from "./form-components/c-body.vue";
-
-export default {
-  components: {
-    cHeader: cHeader,
-    cBody: cBody,
-  },
-  data() {
-    return {
-      productionType: false,
-      showHens: false,
-      showTurkeys: false,
-      productPlaceFields: [],
-    };
-  }
-};
 </script>
 
 <style scoped>
