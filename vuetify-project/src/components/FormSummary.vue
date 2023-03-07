@@ -73,9 +73,9 @@
                         </tr>
                     </thead>
                 </v-table>
-                <div class="summary-btn">
-                    <v-btn color="success">Ändra uppgifter</v-btn>
-                </div>
+            </div>
+            <div class="summary-btn">
+                <v-btn color="success">Ändra uppgifter</v-btn>
             </div>
         </div>
 
@@ -99,10 +99,10 @@
                     </div>
                 </template>
             </v-checkbox>
-            <div class="send-btn" v-if="summaryCheckbox">
-                <v-btn @click="submit()" color="success">Skicka in</v-btn>
-            </div>
         </v-container>
+        <div class="send-btn" v-if="summaryCheckbox">
+            <v-btn @click="submit()" color="success">Skicka in</v-btn>
+        </div>
     </v-form>
 </template>
 
@@ -129,6 +129,10 @@ const submit = () => {
 </script>
 
 <style scoped>
+.send-btn {
+    text-align: center;
+    padding: 10px;
+}
 .summary-btn {
     text-align: center;
     padding: 10px;
