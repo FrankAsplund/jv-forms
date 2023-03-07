@@ -29,7 +29,7 @@
                             <th class="text-right"> {{ formData.ssn }}</th>
                         </tr>
                         <tr>
-                            <th class="text-left">Epost address</th>
+                            <th class="text-left">Epost-address</th>
                             <th class="text-right"> {{ formData.email }}</th>
                         </tr>
                         <tr>
@@ -64,24 +64,12 @@
                 <v-table density="compact">
                     <thead>
                         <tr>
-                            <th class="text-left">Antal kalkoner över 24 veckor i din besättning:</th>
-                            <th class="text-right">{{ formDataApply.averageHensOlderThan20WeeksThisYear }}</th>
-                        </tr>
-                        <tr>
-                            <th class="text-left">Antal slaktkycklingar i normal uppfödningsomgång:</th>
-                            <th class="text-right">{{ formDataApply.averageChickensSlaughteredThisYear }}</th>
-                        </tr>
-                        <tr>
-                            <th class="text-left">Antal kalkonkyckling för äggproduktion:</th>
-                            <th class="text-right">{{ formDataApply.averageEggProducingChickensThisYear }}</th>
-                        </tr>
-                        <tr>
-                            <th class="text-left">Total summa:</th>
-                            <th class="text-right">Nej</th>
-                        </tr>
-                        <tr>
                             <th class="text-left">Jag söker krisstöd för min fjäderfäproduktion</th>
-                            <th class="text-right">{{ formDataApply.productionType }}</th>
+                            <th class="text-right">{{ formDataApply.productionType ? "Ja" : "Nej" }}</th>
+                        </tr>
+                        <tr>
+                            <th class="text-left">Jag söker krisstöd för areal</th>
+                            <th class="text-right">{{ formDataApply.areal ? "Ja" : "Nej" }}</th>
                         </tr>
                     </thead>
                 </v-table>

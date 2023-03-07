@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex bg-light-green-lighten-4 justify-center h-100">
     <v-container class="rounded mx-12">
-      <v-card class="rounded-t-lg">
+      <v-card class="rounded-t-lg" >
         <v-toolbar class="bg-light-blue-lighten-5 text-h5 font-weight-bold justify-center elevation-4" dark>
           <v-breadcrumbs :items="items">
             <template v-slot:title="{ item }">
@@ -15,7 +15,7 @@
         <v-card-actions>
           <v-btn v-if="step > 1" size="x-large" icon="mdi-arrow-left-bold" color="black" @click="step--"></v-btn>
           <v-spacer></v-spacer>
-          <v-btn v-if="step < 4" size="x-large" icon="mdi-arrow-right-bold" color="black" @click="step++"></v-btn>
+          <v-btn v-if="step < 3" size="x-large" icon="mdi-arrow-right-bold" color="black" @click="step++"></v-btn>
         </v-card-actions>
 
         <v-window v-model="step" class="mx-12">
@@ -35,6 +35,11 @@
             <FormDone />
           </v-window-item>
         </v-window>
+        <v-card-actions>
+          <v-btn v-if="step > 1" size="large" prepend-icon="mdi-arrow-left-bold" color="light-blue-accent-4" class="px-2 mx-4" variant="elevated" @click="step--">Tillbaka</v-btn>
+          <v-spacer></v-spacer>
+          <v-btn v-if="step < 3" size="large" append-icon="mdi-arrow-right-bold" color="light-blue-accent-4" class="px-2 mx-4" variant="elevated" @click="step++">Nästa</v-btn>
+        </v-card-actions>
       </v-card>
     </v-container>
   </div>
