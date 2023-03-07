@@ -150,6 +150,10 @@ export default {
 </script>
 
 <style scoped>
+
+.v-container {
+  padding: 2px !important;
+}
 .productionplace-container {
   margin-top: 5rem;
 }
