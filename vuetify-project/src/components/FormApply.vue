@@ -13,15 +13,15 @@
         <v-container>
           <v-checkbox label="Hönsproduktion" color="success" v-model="showHens" hide-details />
           <v-card class="w-100 h-75 my-4" v-if="showHens">
-            <v-text-field v-model="field1" type="text"
+            <v-text-field v-model.number="formDataApply.averageHensOlderThan20WeeksThisYear" type="number"
               label="Ange genomsnittlig antal höns äldre än 20 veckor i din besättning 2023"
               prepend-icon="mdi-plus-box"></v-text-field>
 
-            <v-text-field v-model="field2" type="text"
+            <v-text-field v-model.number="formDataApply.averageChickensSlaughteredThisYear" type="number"
               label="Ange antal slaktkycklingar i en normal uppfödningsomgång under år 2023"
               prepend-icon="mdi-plus-box"></v-text-field>
 
-            <v-text-field v-model="field3" type="text"
+            <v-text-field v-model.number="formDataApply.averageEggProducingChickensThisYear" type="number"
               label="Ange genomsnittligt antal kycklingar för äggproduktion i din besättning 2023"
               prepend-icon="mdi-plus-box"></v-text-field>
 
@@ -78,36 +78,38 @@
 import { useVModel } from "@vueuse/core";
 import { computed, ref } from 'vue'
 
-const field1 = ref(0);
+/* const field1 = ref(0);
 const field2 = ref(0);
-const field3 = ref(0);
-const field4 = ref(0);
-const field5 = ref(0);
-const field6 = ref(0);
+const field3 = ref(0); */
 
-const totalHens = computed(
+/* const field4 = ref(0);
+const field5 = ref(0);
+const field6 = ref(0); */
+
+/* const totalHens = computed(
   () =>
     (Number(field1.value) +
     Number(field2.value) +
     Number(field3.value))
-);
+); */
 
-const totalTurkeys = computed(
+/* const totalTurkeys = computed(
   () =>
     (Number(field4.value) +
     Number(field5.value) +
     Number(field6.value))
-);
+); */
 
 const props = defineProps({
   formDataApplyObj: {
     type: Object,
     default: () => ({
       productionType: false,
-      showHens: false,
-      showTurkeys: false,
-      totalHens: 0,
-      totalTurkeys: 0,
+      averageHensOlderThan20WeeksThisYear: 0,
+      averageChickensSlaughteredThisYear: 0,
+      averageEggProducingChickensThisYear: 0,
+
+
       productPlaceFields: []
     }),
   },
@@ -141,7 +143,6 @@ export default {
       productionType: false,
       showHens: false,
       showTurkeys: false,
-      totalTurkeys: 0,
       productPlaceFields: [],
     };
   }

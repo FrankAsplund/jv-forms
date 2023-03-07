@@ -61,15 +61,15 @@
                     <thead>
                         <tr>
                             <th class="text-left">Antal kalkoner över 24 veckor i din besättning:</th>
-                            <th class="text-right">Ja</th>
+                            <th class="text-right">{{ formDataApply.averageHensOlderThan20WeeksThisYear }}</th>
                         </tr>
                         <tr>
                             <th class="text-left">Antal slaktkycklingar i normal uppfödningsomgång:</th>
-                            <th class="text-right">Ja</th>
+                            <th class="text-right">{{ formDataApply.averageChickensSlaughteredThisYear }}</th>
                         </tr>
                         <tr>
                             <th class="text-left">Antal kalkonkyckling för äggproduktion:</th>
-                            <th class="text-right">Ja</th>
+                            <th class="text-right">{{ formDataApply.averageEggProducingChickensThisYear }}</th>
                         </tr>
                         <tr>
                             <th class="text-left">Total summa:</th>
@@ -77,7 +77,7 @@
                         </tr>
                         <tr>
                             <th class="text-left">Jag söker krisstöd för min fjäderfäproduktion</th>
-                            <th class="text-right">Nej</th>
+                            <th class="text-right">{{ formDataApply.productionType }}</th>
                         </tr>
                     </thead>
                 </v-table>
@@ -113,24 +113,16 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted, onUpdated } from 'vue';
+import { ref } from 'vue';
 
-const formData = reactive({
-  firstname: "John",
-  lastname: "Doe",
-  ssn: "12456-1234",
-  email: "",
-  phoneNumber: "",
-  apply: "",
-  applyCounty: "",
-  applyNumber: "",
+const props = defineProps({
+  formData: {
+    type: Object,
+  },
+  formDataApply: {
+    type: Object,
+  },
 });
-
-onMounted (() => {
-    console.log(formData);
-})
-
-
 
 const summaryCheckbox = ref(false);
 
@@ -138,30 +130,6 @@ const emit = defineEmits(['submit-all'])
 
 const submit = () => {
     emit("submit-all");
-}
-
-async function submitForm() {
-  const data = { ...formData, FormApply: formDataApply };
-
-  formDataApply.productPlaceFields
-  console.log(formData);
-  console.log(formDataApply);
-  try {
-    const response = await axios.get(
-      "https://dummy.restapiexample.com/api/v1/create",
-      data,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-
-    console.log(response.data);
-    document.forms[0].reset();
-  } catch (error) {
-    console.log(error);
-  }
 }
 
 </script>

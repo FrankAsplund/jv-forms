@@ -28,7 +28,7 @@
           </v-window-item>
 
           <v-window-item :value="3">
-            <FormSummary v-model:formDataObj="formData" v-model:formDataApplyObj="formDataApply" @submit-all="submitForm()" />
+            <FormSummary :form-data="formData" :form-data-apply="formDataApply" @submit-all="submitForm()" />
           </v-window-item>
 
           <v-window-item :value="4">
@@ -45,7 +45,7 @@ import Form from "../components/Form.vue";
 import FormApply from "../components/FormApply.vue";
 import FormSummary from "../components/FormSummary.vue";
 import FormDone from "../components/FormDone.vue";
-import { reactive, watchEffect, ref, computed } from "vue";
+import { reactive, watchEffect, ref } from "vue";
 import axios from "axios";
 
 const formData = reactive({
@@ -61,10 +61,11 @@ const formData = reactive({
 
 const formDataApply = reactive({
   productionType: false,
-  showHens: false,
-  showTurkeys: false,
-  totalHens: 0,
-  totalTurkeys: 0,
+  averageHensOlderThan20WeeksThisYear: 0,
+  averageChickensSlaughteredThisYear: 0,
+  averageEggProducingChickensThisYear: 0,
+  /* totalHens: 0,
+  totalTurkeys: 0, */
   productPlaceFields: [],
 });
 
@@ -99,6 +100,8 @@ watchEffect(updateDisabled);
 
 async function submitForm() {
   const data = { ...formData, FormApply: formDataApply };
+
+  /* formDataApply.totalHens = (formDataApply.field1 + formDataApply.field2 + formDataApply.field3); */
 
   formDataApply.productPlaceFields
   console.log(formData);
