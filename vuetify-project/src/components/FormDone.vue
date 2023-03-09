@@ -1,42 +1,16 @@
 <template>
   <v-alert type="success" variant="tonal">
-    id: {{ responseId }} email: {{ responseEmail }}</v-alert
-  >
+    <pre>
+      {{ responseData }}  
+    </pre>
+  </v-alert>
 </template>
 
 <script setup>
-import { onMounted } from "vue";
-
 const props = defineProps({
-  responseId: {
-    type: Number,
+  responseData: {
+    type: Object,
   },
-  responseEmail: {
-    type: String,
-  },
-});
-
-/* console.log(responseId); */
-
-/* async function getData() {
-  try {
-    const response = await axios.get(
-      `https://dummy.restapiexample.com/api/v1/${id}`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    console.log(response.data);
-  } catch (error) {
-    console.log(error);
-  }
-} */
-
-onMounted(() => {
-  console.log(`the component is now mounted.`);
-  /* getData(); */
 });
 </script>
 

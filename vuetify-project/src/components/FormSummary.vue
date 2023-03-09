@@ -123,8 +123,6 @@ const props = defineProps({
 
 const summaryCheckbox = ref(false);
 
-/* const id = response.data.id; */
-
 const emit = defineEmits(["submit-all"]);
 
 const submit = () => {

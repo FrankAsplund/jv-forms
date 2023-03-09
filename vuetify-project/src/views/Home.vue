@@ -50,10 +50,7 @@
           </v-window-item>
 
           <v-window-item :value="4">
-            <FormDone
-              :response-id="responseId"
-              :response-Email="responseEmail"
-            />
+            <FormDone :responseData="responseData" />
           </v-window-item>
         </v-window>
         <v-card-actions>
@@ -120,8 +117,7 @@ const formDataApply = reactive({
 
 const step = ref(1);
 
-const responseId = ref(0);
-const responseEmail = ref("");
+const responseData = ref(null);
 
 const items = reactive([
   {
@@ -177,13 +173,11 @@ async function submitForm() {
       }
     );
 
-    /* responseId.value = response.data.id;
-    responseEmail.value = response.data.FormData.email; */
-
-    /* console.log(responseId);
-    console.log(responseEmail); */
+    responseData.value = response.data;
 
     console.log(response.data);
+    console.log(responseData.value);
+
     document.forms[0].reset();
   } catch (error) {
     console.log(error);
