@@ -1,7 +1,7 @@
 <template>
   <v-alert type="success" variant="tonal">
     <pre>
-      {{ responseData }}  
+      {{ responseData.data }}  
     </pre>
   </v-alert>
 </template>
