@@ -199,7 +199,7 @@
           </v-container>
         </v-card>
       </v-container>
-      <v-file-input
+      <!--       <v-file-input
         v-model="selectedFiles"
         multiple
         label="Bifoga filer"
@@ -208,13 +208,13 @@
         show-size
         persistent-hint
         hint="Bifoga filer du vill skicka med här. Valda filer får ej överskrida 5MB"
-      ></v-file-input>
+      ></v-file-input> -->
     </v-container>
   </v-form>
 </template>
 
 <script setup>
-import CustomBody from "../components/form-components/c-body.vue";
+import CustomBody from "../form-components/c-body.vue";
 import { useVModels } from "@vueuse/core";
 import { ref, computed, watchEffect, watch } from "vue";
 import { useVuelidate } from "@vuelidate/core";
@@ -241,18 +241,16 @@ const props = defineProps({
       // Initial value in Product Place fields array
       application_sites_turkeys: [{ value: "" }],
       application_sites_hens: [{ value: "" }],
-
-      attachments: [],
     }),
   },
   valid: {
     type: Boolean,
     default: false,
   },
-  selectedFiles: {
+  /*   selectedFiles: {
     type: Array,
     default: [],
-  },
+  }, */
 });
 
 const application_poultry_hens_total_count = computed(
@@ -273,13 +271,11 @@ const emit = defineEmits([
   "update:modelValue",
   "update:formDataApplyObj",
   "update:valid",
-  "update:selectedFiles",
 ]);
-const {
-  formDataApplyObj: formDataApply,
-  valid: isFormValid,
-  selectedFiles,
-} = useVModels(props, emit);
+const { formDataApplyObj: formDataApply, valid: isFormValid } = useVModels(
+  props,
+  emit
+);
 
 function addProductionPlaceHens() {
   formDataApply.value.application_sites_hens.push({ value: "" });
@@ -299,7 +295,7 @@ function removeProductionPlaceTurkeys(index) {
 
 const files = ref([]);
 
-watch(
+/* watch(
   () => props.selectedFiles,
   (newVal) => {
     files.value = newVal;
@@ -311,7 +307,7 @@ watch(
       }
     });
   }
-);
+); */
 
 const rules = computed(() => ({
   data: {

@@ -25,7 +25,6 @@
           <v-spacer></v-spacer>
           <v-btn
             v-if="step < 3"
-            :disabled="!canGoNext"
             size="x-large"
             icon="mdi:mdi-arrow-right-bold"
             color="black"
@@ -34,35 +33,35 @@
         </v-card-actions>
 
         <v-window v-model="step" class="mx-12">
-          <v-defaults-provider :defaults="jvDefaults">
-            <v-window-item :value="1">
-              <personal-info-form
-                v-model:formDataObj="formData"
-                v-model:valid="isPersonalInfoFormValid"
-              />
-            </v-window-item>
+          <!-- <v-defaults-provider :defaults="jvDefaults"> -->
+          <v-window-item :value="1">
+            <personal-info-form
+              v-model:formDataObj="formData"
+              v-model:valid="isPersonalInfoFormValid"
+            />
+          </v-window-item>
 
-            <v-window-item :value="2">
-              <application-form
-                v-model:formDataApplyObj="formDataApply"
-                v-model:valid="isApplyFormValid"
-                v-model:selected-files="selectedFiles"
-              />
-            </v-window-item>
+          <v-window-item :value="2">
+            <application-form
+              v-model:formDataApplyObj="formDataApply"
+              v-model:valid="isApplyFormValid"
+              v-model:selected-files="selectedFiles"
+            />
+          </v-window-item>
 
-            <v-window-item :value="3">
-              <summary-form
-                v-model:valid="isSummaryFormValid"
-                v-model:step-prop="step"
-                :form-data="formData"
-                :form-data-apply="formDataApply"
-                @submit-all="submitForm()"
-              />
-            </v-window-item>
-            <v-window-item :value="4">
-              <done-form :response-data="responseData" />
-            </v-window-item>
-          </v-defaults-provider>
+          <v-window-item :value="3">
+            <summary-form
+              v-model:valid="isSummaryFormValid"
+              v-model:step-prop="step"
+              :form-data="formData"
+              :form-data-apply="formDataApply"
+              @submit-all="submitForm()"
+            />
+          </v-window-item>
+          <v-window-item :value="4">
+            <done-form :response-data="responseData" />
+          </v-window-item>
+          <!-- </v-defaults-provider> -->
         </v-window>
         <v-card-actions>
           <v-btn
@@ -109,6 +108,7 @@ import ApplicationForm from "../components/forms/form-application.vue";
 import SummaryForm from "../components/forms/form-summary.vue";
 import DoneForm from "../components/forms/form-done.vue";
 import { reactive, watchEffect, ref, watch, computed } from "vue";
+import axios from "axios";
 /* import { useOnifyApi } from "@onify/helix-core"; */
 
 // import { useOnifyApi } from '@onify/helix-core';
@@ -150,11 +150,11 @@ const formDataApply = reactive({
   // Initial value in Product Place fields array
   application_sites_turkeys: [{ value: "" }],
   application_sites_hens: [{ value: "" }],
-  attachments: [],
+  /* attachments: [], */
 });
 
 const step = ref(1);
-const selectedFiles = ref([]);
+/* const selectedFiles = ref([]); */
 
 const isPersonalInfoFormValid = ref(false);
 const isApplyFormValid = ref(false);
@@ -210,10 +210,8 @@ watch(userSettings, () => {
     userSettings.value?.custom?.personal_number;
 }); */
 
-function upload() {
+/* function upload() {
   try {
-    // Remove this when implementing onifyApiRequest
-    /* const apiUrl = "/files/public/"; */
 
     return selectedFiles.value.map(async (file) => {
       return new Promise((resolve, reject) => {
@@ -227,14 +225,11 @@ function upload() {
               body: arrayBuffer,
             });
             console.log("File upload successful:", response);
-
-            // Convert the response object to JSON
+            
             const jsonResponse = await response.json();
-
-            // Delete the 'content' property from the jsonResponse object
+            
             delete jsonResponse.content;
 
-            // Push the modified jsonResponse object to the formDataApply.attachments array
             formDataApply.attachments.push(jsonResponse);
 
             resolve();
@@ -254,7 +249,7 @@ function upload() {
   } catch (error) {
     console.error("Error uploading files:", error);
   }
-}
+} */
 
 async function submitForm() {
   loading.value = true;
@@ -273,15 +268,18 @@ async function submitForm() {
   formDataApply.application_sites_turkeys;
   formDataApply.application_sites_hens;
 
-  await Promise.all(upload());
+  /* await Promise.all(upload()); */
 
   try {
-    const response = await onifyApiRequest.update(
+    /* const response = await onifyApiRequest.update(
       "/my/workflows/run/create-case",
       { json: data }
     );
 
-    responseData.value = (await response.json()).output;
+    responseData.value = (await response.json()).output; */
+    axios
+      .post("http://localhost:8000/posts", data)
+      .then((response) => console.log(response));
     console.log(responseData.value);
 
     step.value = 4;

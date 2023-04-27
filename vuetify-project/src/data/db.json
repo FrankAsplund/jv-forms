@@ -1,0 +1,43 @@
+{
+  "posts": [
+    {
+      "FormData": {
+        "applicant_firstname": "",
+        "applicant_lastname": "",
+        "applicant_personal_number": "",
+        "contact_email": "",
+        "confirmContactEmail": "",
+        "applicant_customer_number": "",
+        "applicant_type": "",
+        "applicant_county_name": "",
+        "applicant_county": ""
+      },
+      "FormApply": {
+        "application_area": false,
+        "application_poultry": false,
+        "application_poultry_hens_older": null,
+        "application_poultry_hens_broilers": null,
+        "application_poultry_hens_egg": null,
+        "application_poultry_hens": false,
+        "application_poultry_turkeys": false,
+        "application_poultry_turkeys_older": null,
+        "application_poultry_turkeys_broilers": null,
+        "application_poultry_turkeys_egg": null,
+        "application_poultry_hens_total_count": 0,
+        "application_poultry_turkeys_total_count": 0,
+        "application_sites_turkeys": [
+          {
+            "value": ""
+          }
+        ],
+        "application_sites_hens": [
+          {
+            "value": ""
+          }
+        ],
+        "attachments": []
+      },
+      "id": 2
+    }
+  ]
+}

@@ -2,7 +2,7 @@
   <custom-header header="Tack för din ansökan!" />
   <v-alert type="success" variant="tonal">
     <pre>
-        Ditt casenummer är {{ responseData.caseNumber }}  
+        Ditt casenummer är {{ responseData }}  
       </pre
     >
   </v-alert>
@@ -13,7 +13,7 @@
 </template>
 
 <script setup>
-import CustomHeader from "../components/form-components/c-header.vue";
+import CustomHeader from "../form-components/c-header.vue";
 
 defineProps({
   responseData: {

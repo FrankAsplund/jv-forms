@@ -10,7 +10,6 @@
             label="Förnamn"
             type="text"
             prepend-inner-icon="mdi:mdi-account-box"
-            disabled
           ></v-text-field>
           <v-text-field
             v-model="formData.applicant_lastname"
@@ -18,7 +17,6 @@
             label="Efternamn"
             type="text"
             prepend-inner-icon="mdi:mdi-account-box"
-            disabled
           ></v-text-field>
           <v-text-field
             v-model="formData.applicant_personal_number"
@@ -26,7 +24,6 @@
             label="Personnummer"
             type="text"
             prepend-inner-icon="mdi:mdi-account-box"
-            disabled
           ></v-text-field>
         </v-row>
         <v-col cols="12" md="12">
@@ -113,8 +110,8 @@
 </template>
 
 <script setup>
-import CustomBody from "./form-components/c-body.vue";
-import items from "../components/counties.js";
+import CustomBody from "../form-components/c-body.vue";
+import items from "../form-components/counties.js";
 import { useVModels } from "@vueuse/core";
 import { reactive, computed, watchEffect } from "vue";
 
