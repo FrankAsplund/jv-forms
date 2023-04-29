@@ -7,9 +7,6 @@
     >
   </v-alert>
   <v-btn class="ma-4" color="primary" @click="refreshPage()">Ny ansökan</v-btn>
-  <v-btn class="ma-4" color="brown"
-    ><a href="https://jordbruksverket.se/">Till Jordbruksverket</a></v-btn
-  >
 </template>
 
 <script setup>

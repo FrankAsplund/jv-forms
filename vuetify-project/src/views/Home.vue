@@ -33,7 +33,6 @@
         </v-card-actions>
 
         <v-window v-model="step" class="mx-12">
-          <!-- <v-defaults-provider :defaults="jvDefaults"> -->
           <v-window-item :value="1">
             <personal-info-form
               v-model:formDataObj="formData"
@@ -61,7 +60,6 @@
           <v-window-item :value="4">
             <done-form :response-data="responseData" />
           </v-window-item>
-          <!-- </v-defaults-provider> -->
         </v-window>
         <v-card-actions>
           <v-btn
@@ -109,12 +107,6 @@ import SummaryForm from "../components/forms/form-summary.vue";
 import DoneForm from "../components/forms/form-done.vue";
 import { reactive, watchEffect, ref, watch, computed } from "vue";
 import axios from "axios";
-/* import { useOnifyApi } from "@onify/helix-core"; */
-
-// import { useOnifyApi } from '@onify/helix-core';
-// const onifyHttpRequest = useOnifyApi();
-
-/* const onifyApiRequest = useOnifyApi(); */
 
 const loading = ref(false);
 
@@ -150,11 +142,9 @@ const formDataApply = reactive({
   // Initial value in Product Place fields array
   application_sites_turkeys: [{ value: "" }],
   application_sites_hens: [{ value: "" }],
-  /* attachments: [], */
 });
 
 const step = ref(1);
-/* const selectedFiles = ref([]); */
 
 const isPersonalInfoFormValid = ref(false);
 const isApplyFormValid = ref(false);
@@ -202,55 +192,6 @@ function updateDisabled() {
 
 watchEffect(updateDisabled);
 
-/* const { data: userSettings } = onifyApiRequest.fetch("/my/settings");
-watch(userSettings, () => {
-  formData.applicant_firstname = userSettings.value?.custom?.firstname;
-  formData.applicant_lastname = userSettings.value?.custom?.lastname;
-  formData.applicant_personal_number =
-    userSettings.value?.custom?.personal_number;
-}); */
-
-/* function upload() {
-  try {
-
-    return selectedFiles.value.map(async (file) => {
-      return new Promise((resolve, reject) => {
-        try {
-          const fileReader = new FileReader();
-
-          fileReader.onload = async (e) => {
-            const arrayBuffer = e.target.result;
-
-            const response = await onifyApiRequest.update(apiUrl + file.name, {
-              body: arrayBuffer,
-            });
-            console.log("File upload successful:", response);
-            
-            const jsonResponse = await response.json();
-            
-            delete jsonResponse.content;
-
-            formDataApply.attachments.push(jsonResponse);
-
-            resolve();
-          };
-
-          fileReader.onerror = (error) => {
-            console.error("Error reading file:", error);
-          };
-
-          fileReader.readAsArrayBuffer(file);
-        } catch (error) {
-          console.error("Error uploading file:", error);
-          reject();
-        }
-      });
-    });
-  } catch (error) {
-    console.error("Error uploading files:", error);
-  }
-} */
-
 async function submitForm() {
   loading.value = true;
   const data = { FormData: formData, FormApply: formDataApply };
@@ -268,15 +209,7 @@ async function submitForm() {
   formDataApply.application_sites_turkeys;
   formDataApply.application_sites_hens;
 
-  /* await Promise.all(upload()); */
-
   try {
-    /* const response = await onifyApiRequest.update(
-      "/my/workflows/run/create-case",
-      { json: data }
-    );
-
-    responseData.value = (await response.json()).output; */
     axios
       .post("http://localhost:8000/posts", data)
       .then((response) => console.log(response));

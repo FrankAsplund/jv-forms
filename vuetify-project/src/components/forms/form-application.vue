@@ -199,16 +199,6 @@
           </v-container>
         </v-card>
       </v-container>
-      <!--       <v-file-input
-        v-model="selectedFiles"
-        multiple
-        label="Bifoga filer"
-        accept="image/png, image/jpeg, .png, .jpg, .jpeg .doc, .docx, .xml,application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-        class="w-75 h-75"
-        show-size
-        persistent-hint
-        hint="Bifoga filer du vill skicka med här. Valda filer får ej överskrida 5MB"
-      ></v-file-input> -->
     </v-container>
   </v-form>
 </template>
@@ -247,10 +237,6 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  /*   selectedFiles: {
-    type: Array,
-    default: [],
-  }, */
 });
 
 const application_poultry_hens_total_count = computed(
@@ -294,20 +280,6 @@ function removeProductionPlaceTurkeys(index) {
 }
 
 const files = ref([]);
-
-/* watch(
-  () => props.selectedFiles,
-  (newVal) => {
-    files.value = newVal;
-
-    files.value.forEach((file) => {
-      if (file.size > 1024 * 1024 * 5) {
-        selectedFiles.value = [];
-        alert("Den valda filen är för stor, vänligen välj en fil under 5MB");
-      }
-    });
-  }
-); */
 
 const rules = computed(() => ({
   data: {
