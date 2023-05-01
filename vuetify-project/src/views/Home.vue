@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex bg-light-green-lighten-4 justify-center h-100">
-    <v-container class="rounded mx-12">
+    <v-container class="rounded mx-12 mt-16">
       <v-card class="rounded-t-lg">
         <v-toolbar
           class="bg-light-blue-lighten-5 text-h5 font-weight-bold justify-center elevation-4"
@@ -44,7 +44,6 @@
             <application-form
               v-model:formDataApplyObj="formDataApply"
               v-model:valid="isApplyFormValid"
-              v-model:selected-files="selectedFiles"
             />
           </v-window-item>
 
