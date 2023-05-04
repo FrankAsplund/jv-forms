@@ -28,7 +28,6 @@
         </v-row>
         <v-col cols="12" md="12">
           <v-text-field
-            autofocus
             v-model="v$.contact_email.$model"
             :error-messages="v$.contact_email.$errors[0]?.$message"
             label="E-post"
