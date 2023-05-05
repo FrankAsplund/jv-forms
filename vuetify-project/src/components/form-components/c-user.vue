@@ -17,7 +17,7 @@
         </v-card-text>
         <v-card-actions>
           <v-btn color="error" @click="dialog = false">Close</v-btn>
-          <v-btn color="primary" @click="login">Log in</v-btn>
+          <v-btn color="primary" @click="login()">Log in</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -25,29 +25,38 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, reactive } from "vue";
 import CustomBody from "./c-body.vue";
 import { useVModel } from "@vueuse/core";
 
 const dialog = ref(false);
 
+const user = reactive({
+  username: "",
+  password: "",
+});
+
 const props = defineProps({
-  user: {
-    type: Object,
+  loggedIn: {
+    type: Boolean,
     default: () => ({
-      username: "",
-      password: "",
+      default: false,
     }),
   },
 });
 
-const emit = defineEmits(["update:user"]);
-const user = useVModel(props, "user", emit);
+const emit = defineEmits(["update:loggedIn"]);
+const loggedIn = useVModel(props, "loggedIn", emit);
 
 function login() {
-  if (user.username == "admin" || user.password == "admin") {
+  if (user.username == "admin" && user.password == "admin") {
+    console.log(user.username);
+    console.log(user.password);
+    loggedIn.value = true;
     console.log("You are now logged in");
   } else {
+    console.log(user.username);
+    console.log(user.password);
     console.log("Username and Password are incorrect");
   }
 }
