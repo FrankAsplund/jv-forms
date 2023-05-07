@@ -1,6 +1,6 @@
 <template>
   <div class="mt-16">
-    <v-bottom-navigation :elevation="8" grow>
+    <v-bottom-navigation :elevation="8" grow class="bg-grey-darken-4">
       <v-btn value="recent">
         <v-icon>mdi-history</v-icon>
 

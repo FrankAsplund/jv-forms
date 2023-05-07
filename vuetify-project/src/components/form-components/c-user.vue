@@ -2,7 +2,7 @@
   <div class="text-center">
     <v-dialog v-model="dialog" class="w-50 h-75">
       <template v-slot:activator="{ props }">
-        <v-btn color="black" v-bind="props" icon="mdi-account"></v-btn>
+        <v-btn color="white" v-bind="props" icon="mdi-account"></v-btn>
       </template>
 
       <v-card>

@@ -2,7 +2,7 @@
   <custom-header header="Tack för din ansökan!" />
   <v-alert type="success" variant="tonal">
     <pre>
-        Ditt casenummer är {{ responseData }}  
+        {{ responseData }}  
       </pre
     >
   </v-alert>
