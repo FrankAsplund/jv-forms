@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-btn color="white" icon="mdi-shield-sword"></v-btn>
+    <v-btn to="/Admin" color="white" icon="mdi-shield-sword" />
   </div>
 </template>
 

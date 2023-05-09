@@ -1,9 +1,9 @@
 <template>
-  <div class="d-flex bg-grey-darken-3 justify-center h-100">
+  <div class="d-flex bg-indigo-lighten-4 justify-center h-100">
     <v-container class="rounded mx-12 mt-16">
       <v-card class="rounded-t-lg">
         <v-toolbar
-          class="bg-blue-grey-lighten-2 text-h5 font-weight-bold justify-center elevation-4"
+          class="bg-indigo-darken-1 text-h5 font-weight-bold justify-center elevation-4"
           dark
         >
           <v-breadcrumbs :items="items">
