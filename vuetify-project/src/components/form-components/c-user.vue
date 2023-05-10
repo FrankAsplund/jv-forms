@@ -28,6 +28,7 @@
 import { ref, reactive } from "vue";
 import CustomBody from "./c-body.vue";
 import { useVModel } from "@vueuse/core";
+import axios from "axios";
 
 const dialog = ref(false);
 
@@ -60,4 +61,26 @@ function login() {
     console.log("Username and Password are incorrect");
   }
 }
+
+/* function login() {
+  if (user.username == "admin" && user.password == "admin") {
+    console.log(user.username);
+    console.log(user.password);
+    try {
+      axios
+        .post("http://localhost:8000/loginStatus", {
+          status: true,
+        })
+        .then(function (response) {
+          console.log(response, "Du är nu inloggad.");
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  } else {
+    console.log(user.username);
+    console.log(user.password);
+    console.log("Username and Password are incorrect");
+  }
+} */
 </script>
