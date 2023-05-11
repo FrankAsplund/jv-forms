@@ -16,8 +16,8 @@
           <v-text-field v-model="user.password" label="Lösenord" class="mb-2" />
         </v-card-text>
         <v-card-actions>
-          <v-btn color="error" @click="dialog = false">Close</v-btn>
-          <v-btn color="primary" @click="login()">Log in</v-btn>
+          <v-btn color="error" @click="dialog = false">Stäng</v-btn>
+          <v-btn color="primary" @click="login()">Logga in</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -28,7 +28,7 @@
 import { ref, reactive } from "vue";
 import CustomBody from "./c-body.vue";
 import { useVModel } from "@vueuse/core";
-import axios from "axios";
+/* import axios from "axios"; */
 
 const dialog = ref(false);
 
