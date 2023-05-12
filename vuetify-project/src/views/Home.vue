@@ -212,7 +212,8 @@ async function submitForm() {
     axios
       .post("http://localhost:8000/posts", data)
       .then((response) => console.log(response));
-    console.log(responseData.value);
+    /* console.log(responseData.value); */
+    responseData.value = data;
 
     step.value = 4;
   } catch (error) {

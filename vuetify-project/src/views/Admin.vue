@@ -16,6 +16,7 @@
         </div>
 
         <div class="d-flex align-content-space-between flex-wrap ma-4 pa-2">
+          <custom-header> Alla Formulär </custom-header>
           <v-card
             v-for="post in posts"
             :key="post.id"
@@ -29,21 +30,25 @@
             <v-card-item>
               <div>
                 <div class="text-h6 mb-1">
-                  {{ post.applicant_firstname }} {{ post.applicant_lastname }}
-                </div>
-                <!-- <div class="text-overline mb-1">Titel: {{ post.title }}</div> -->
-                <div class="text-caption">
-                  Telefonnummer: {{ post.applicant_customer_number }}
-                </div>
-                <div class="text-caption">E-post: {{ post.contact_email }}</div>
-                <div class="text-caption">Avdelning: {{ post.department }}</div>
-                <div class="text-caption">
-                  Behörighet: {{ post.applicant_type }}
+                  {{ post.FormData.applicant_firstname }}
+                  {{ post.FormData.applicant_lastname }}
                 </div>
                 <div class="text-caption">
-                  {{ post.applicant_county_name }}
+                  Telefonnummer: {{ post.FormData.applicant_customer_number }}
                 </div>
-                <div class="text-caption">Län: {{ post.applicant_county }}</div>
+                <div class="text-caption">
+                  E-post: {{ post.FormData.contact_email }}
+                </div>
+                <div class="text-caption">
+                  Avdelning: {{ post.FormData.department }}
+                </div>
+                <div class="text-caption">
+                  Söktyp: {{ post.FormData.applicant_type }}
+                </div>
+                <div class="text-caption">
+                  Län {{ post.FormData.applicant_county_name }}
+                  {{ post.FormData.applicant_county }}
+                </div>
               </div>
             </v-card-item>
             <v-card-actions>
@@ -63,8 +68,27 @@
                 <v-card>
                   <v-card-text>
                     <v-table density="compact">
-                      {{ post.application_poultry ? "Ja" : "Nej" }}
-                      {{ post.application_area ? "Ja" : "Nej" }}
+                      {{ post.FormApply.application_poultry ? "Ja" : "Nej" }}
+                      {{ post.FormApply.application_area ? "Ja" : "Nej" }}
+
+                      {{ post.FormApply.application_poultry_hens_older }}
+                      {{ post.FormApply.application_poultry_hens_broilers }}
+                      {{ post.FormApply.application_poultry_hens_egg }}
+
+                      {{ post.FormApply.application_poultry_hens }}
+                      {{ post.FormApply.application_poultry_turkeys }}
+
+                      {{ post.FormApply.application_poultry_turkeys_older }}
+                      {{ post.FormApply.application_poultry_turkeys_broilers }}
+                      {{ post.FormApply.application_poultry_turkeys_egg }}
+
+                      {{ post.FormApply.application_poultry_hens_total_count }}
+                      {{
+                        post.FormApply.application_poultry_turkeys_total_count
+                      }}
+
+                      {{ post.FormApply.application_sites_turkeys }}
+                      {{ post.FormApply.application_sites_hens }}
                     </v-table>
                   </v-card-text>
                   <v-card-actions>
@@ -83,10 +107,11 @@
 <script setup>
 import axios from "axios";
 import { ref, onMounted } from "vue";
+import CustomHeader from "../components/form-components/c-header.vue";
 
 const dialog = ref(false);
 const posts = ref([]);
-const search = ref("");
+const search = ref(null);
 
 const deleteData = async (id) => {
   if (
@@ -115,8 +140,12 @@ const deleteData = async (id) => {
 const getAllPosts = async () => {
   try {
     const response = await axios.get("http://localhost:8000/posts");
-    const data = response.data;
-    if (search.value) {
+    /* const data = response.data; */
+
+    posts.value = response.data;
+    /* console.log(data); */
+    console.log(posts.value);
+    /* if (search.value) {
       posts.value = data.filter(
         (post) =>
           post.applicant_firstname
@@ -138,8 +167,8 @@ const getAllPosts = async () => {
       );
     } else {
       console.log(data);
-      posts.value = data;
-    }
+      posts.value = response.data;
+    } */
   } catch (error) {
     console.log(error);
   }

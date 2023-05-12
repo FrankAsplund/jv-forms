@@ -2,18 +2,60 @@
   "posts": [
     {
       "FormData": {
-        "applicant_firstname": "",
-        "applicant_lastname": "",
-        "applicant_personal_number": "",
-        "contact_email": "",
-        "confirmContactEmail": "",
-        "applicant_customer_number": "",
-        "applicant_type": "",
+        "applicant_firstname": "Frank",
+        "applicant_lastname": "Asplund",
+        "applicant_personal_number": "000000000",
+        "contact_email": "test@test.com",
+        "confirmContactEmail": "test@test.com",
+        "applicant_customer_number": "123456789",
+        "applicant_type": "Jag söker som privatperson/enskild firma",
+        "applicant_county_name": {
+          "abbr": "AB",
+          "place": "Stockholm",
+          "name": "AB - Stockholm"
+        },
+        "applicant_county": "123435"
+      },
+      "FormApply": {
+        "application_area": true,
+        "application_poultry": true,
+        "application_poultry_hens_older": 2,
+        "application_poultry_hens_broilers": 2,
+        "application_poultry_hens_egg": 2,
+        "application_poultry_hens": true,
+        "application_poultry_turkeys": true,
+        "application_poultry_turkeys_older": 3,
+        "application_poultry_turkeys_broilers": 3,
+        "application_poultry_turkeys_egg": 3,
+        "application_poultry_hens_total_count": 6,
+        "application_poultry_turkeys_total_count": 9,
+        "application_sites_turkeys": [
+          {
+            "value": "123345"
+          }
+        ],
+        "application_sites_hens": [
+          {
+            "value": "123345"
+          }
+        ]
+      },
+      "id": 3
+    },
+    {
+      "FormData": {
+        "applicant_firstname": "test",
+        "applicant_lastname": "test",
+        "applicant_personal_number": "1234",
+        "contact_email": "tt@tt.com",
+        "confirmContactEmail": "tt@tt.com",
+        "applicant_customer_number": "000000000",
+        "applicant_type": "Jag söker som ombud för privatperson/enskild firma",
         "applicant_county_name": "",
         "applicant_county": ""
       },
       "FormApply": {
-        "application_area": false,
+        "application_area": true,
         "application_poultry": false,
         "application_poultry_hens_older": null,
         "application_poultry_hens_broilers": null,
@@ -34,10 +76,9 @@
           {
             "value": ""
           }
-        ],
-        "attachments": []
+        ]
       },
-      "id": 2
+      "id": 4
     }
   ],
   "loginStatus": [
