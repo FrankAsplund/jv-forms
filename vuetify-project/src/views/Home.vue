@@ -122,25 +122,23 @@ const formData = reactive({
 });
 
 const formDataApply = reactive({
-  application_area: false,
-  application_poultry: false,
-  application_poultry_hens_older: null,
-  application_poultry_hens_broilers: null,
-  application_poultry_hens_egg: null,
+  application_check: false,
+  application_expand: false,
 
-  application_poultry_hens: false,
-  application_poultry_turkeys: false,
+  application_expand_mental_anxiety_slider: null,
+  application_expand_mental_stress_slider: null,
+  application_expand_mental_health_slider: null,
 
-  application_poultry_turkeys_older: null,
-  application_poultry_turkeys_broilers: null,
-  application_poultry_turkeys_egg: null,
+  application_expand_mental: false,
+  application_expand_physical: false,
 
-  application_poultry_hens_total_count: 0,
-  application_poultry_turkeys_total_count: 0,
+  application_expand_physical_health_slider: null,
+  application_expand_physical_activity_slider: null,
+  application_expand_physical_body_slider: null,
 
   // Initial value in Product Place fields array
-  application_sites_turkeys: [{ value: "" }],
-  application_sites_hens: [{ value: "" }],
+  /* application_sites_turkeys: [{ value: "" }],
+  application_sites_hens: [{ value: "" }], */
 });
 
 const step = ref(1);
@@ -195,7 +193,7 @@ async function submitForm() {
   loading.value = true;
   const data = { FormData: formData, FormApply: formDataApply };
 
-  formDataApply.application_poultry_hens_total_count =
+  /* formDataApply.application_poultry_hens_total_count =
     formDataApply.application_poultry_hens_older +
     formDataApply.application_poultry_hens_broilers +
     formDataApply.application_poultry_hens_egg;
@@ -206,7 +204,10 @@ async function submitForm() {
     formDataApply.application_poultry_turkeys_egg;
 
   formDataApply.application_sites_turkeys;
-  formDataApply.application_sites_hens;
+  formDataApply.application_sites_hens; */
+
+  formDataApply.application_expand_mental;
+  formDataApply.application_expand_physical;
 
   try {
     axios

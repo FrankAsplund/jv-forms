@@ -79,6 +79,32 @@
         ]
       },
       "id": 4
+    },
+    {
+      "FormData": {
+        "applicant_firstname": "",
+        "applicant_lastname": "",
+        "applicant_personal_number": "",
+        "contact_email": "",
+        "confirmContactEmail": "",
+        "applicant_customer_number": "",
+        "applicant_type": "",
+        "applicant_county_name": "",
+        "applicant_county": ""
+      },
+      "FormApply": {
+        "application_check": true,
+        "application_expand": true,
+        "application_expand_mental_anxiety_slider": 50,
+        "application_expand_mental_stress_slider": 20,
+        "application_expand_mental_health_slider": 50,
+        "application_expand_mental": true,
+        "application_expand_physical": true,
+        "application_expand_physical_health_slider": 30,
+        "application_expand_physical_activity_slider": 30,
+        "application_expand_physical_body_slider": 30
+      },
+      "id": 5
     }
   ],
   "loginStatus": [

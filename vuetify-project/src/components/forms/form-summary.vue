@@ -80,7 +80,7 @@
             <tr>
               <th class="text-left">Jag söker krisstöd för areal</th>
               <th class="text-right">
-                {{ formDataApply.application_area ? "Ja" : "Nej" }}
+                {{ formDataApply.application_check ? "Ja" : "Nej" }}
               </th>
             </tr>
           </thead>

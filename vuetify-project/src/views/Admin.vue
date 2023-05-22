@@ -68,27 +68,141 @@
                 <v-card>
                   <v-card-text>
                     <v-table density="compact">
-                      {{ post.FormApply.application_poultry ? "Ja" : "Nej" }}
-                      {{ post.FormApply.application_area ? "Ja" : "Nej" }}
+                      <thead>
+                        <tr>
+                          <th class="text-left">
+                            "Jag mår fysiskt och mentalt bra de flesta dagarna"
+                          </th>
 
-                      {{ post.FormApply.application_poultry_hens_older }}
-                      {{ post.FormApply.application_poultry_hens_broilers }}
-                      {{ post.FormApply.application_poultry_hens_egg }}
+                          <th class="text-right">
+                            {{
+                              post.FormApply.application_check ? "Ja" : "Nej"
+                            }}
+                          </th>
+                        </tr>
 
-                      {{ post.FormApply.application_poultry_hens }}
-                      {{ post.FormApply.application_poultry_turkeys }}
+                        <tr>
+                          <th class="text-left">
+                            "Jag är villig att besvara ytterligare frågor om min
+                            hälsa", :
+                          </th>
 
-                      {{ post.FormApply.application_poultry_turkeys_older }}
-                      {{ post.FormApply.application_poultry_turkeys_broilers }}
-                      {{ post.FormApply.application_poultry_turkeys_egg }}
+                          <th class="text-right">
+                            {{
+                              post.FormApply.application_expand ? "Ja" : "Nej"
+                            }}
+                          </th>
+                        </tr>
 
-                      {{ post.FormApply.application_poultry_hens_total_count }}
-                      {{
-                        post.FormApply.application_poultry_turkeys_total_count
-                      }}
+                        <tr>
+                          <th class="text-left">
+                            "Jag vill besvara frågor om min mentala hälsa"
+                          </th>
 
-                      {{ post.FormApply.application_sites_turkeys }}
-                      {{ post.FormApply.application_sites_hens }}
+                          <th class="text-right">
+                            {{
+                              post.FormApply.application_expand_mental
+                                ? "Ja"
+                                : "Nej"
+                            }}
+                          </th>
+                        </tr>
+
+                        <tr>
+                          <th class="text-left">
+                            "Hur mycket ångest eller oro upplever du ungefär per
+                            månad?"
+                          </th>
+
+                          <th class="text-right">
+                            {{
+                              post.FormApply
+                                .application_expand_mental_anxiety_slider
+                            }}
+                          </th>
+                        </tr>
+
+                        <tr>
+                          <th class="text-left">
+                            "Hur bra är du på att hantera stress i din vardag?"
+                          </th>
+
+                          <th class="text-right">
+                            {{
+                              post.FormApply
+                                .application_expand_mental_stress_slider
+                            }}
+                          </th>
+                        </tr>
+
+                        <tr>
+                          <th class="text-left">
+                            "Hur bra skulle du säga att din mentala hälsa är,
+                            allmänt?"
+                          </th>
+
+                          <th class="text-right">
+                            {{
+                              post.FormApply
+                                .application_expand_mental_health_slider
+                            }}
+                          </th>
+                        </tr>
+
+                        <tr>
+                          <th class="text-left">
+                            "Jag vill besvara frågor om min fysiska hälsa"
+                          </th>
+
+                          <th class="text-right">
+                            {{
+                              post.FormApply.application_expand_physical
+                                ? "Ja"
+                                : "Nej"
+                            }}
+                          </th>
+                        </tr>
+
+                        <tr>
+                          <th class="text-left">
+                            "Hur skulle du bedöma din allmänna fysiska hälsa?"
+                          </th>
+
+                          <th class="text-right">
+                            {{
+                              post.FormApply
+                                .application_expand_physical_health_slider
+                            }}
+                          </th>
+                        </tr>
+
+                        <tr>
+                          <th class="text-left">
+                            "Hur ofta deltar du i regelbunden fysisk aktivitet,
+                            så som träning eller motion?"
+                          </th>
+
+                          <th class="text-right">
+                            {{
+                              post.FormApply
+                                .application_expand_physical_activity_slider
+                            }}
+                          </th>
+                        </tr>
+
+                        <tr>
+                          <th class="text-left">
+                            "Hur nöjd är du med din kropp i överlag?"
+                          </th>
+
+                          <th class="text-right">
+                            {{
+                              post.FormApply
+                                .application_expand_physical_body_slider
+                            }}
+                          </th>
+                        </tr>
+                      </thead>
                     </v-table>
                   </v-card-text>
                   <v-card-actions>

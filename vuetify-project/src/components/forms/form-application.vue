@@ -1,7 +1,7 @@
 <template>
   <v-form v-if="v$" validate-on="submit" variant="filled">
     <v-container class="pa-2 rounded-sm align-items">
-      <custom-body>Produktion</custom-body>
+      <custom-body>Undersökning för mental hälsa</custom-body>
 
       <v-hover v-slot="{ isHovering, props: hprops }">
         <v-card
@@ -10,8 +10,8 @@
           :color="isHovering ? 'light-green-lighten-5' : undefined"
         >
           <v-checkbox
-            v-model="v$.data.application_area.$model"
-            label="Jag söker krisstöd för areal"
+            v-model="v$.data.application_check.$model"
+            label="Jag mår fysiskt och mentalt bra de flesta dagarna"
             color="success"
             hide-details
           ></v-checkbox>
@@ -25,140 +25,146 @@
           :color="isHovering ? 'light-green-lighten-5' : undefined"
         >
           <v-checkbox
-            v-model="v$.data.application_poultry.$model"
-            label="Jag söker krisstöd för min fjäderfäproduktion"
+            v-model="v$.data.application_expand.$model"
+            label="Jag är villig att besvara ytterligare frågor om min hälsa"
             color="success"
             hide-details
           ></v-checkbox>
         </v-card>
       </v-hover>
-      <v-container v-if="v$.data.application_poultry.$model">
+      <v-container v-if="v$.data.application_expand.$model">
         <v-checkbox
-          v-model="v$.data.application_poultry_hens.$model"
-          label="Hönsproduktion"
+          v-model="v$.data.application_expand_mental.$model"
+          label="Jag vill besvara frågor om min mentala hälsa"
           color="success"
           hide-details
         />
         <v-card
-          v-if="v$.data.application_poultry_hens.$model"
+          v-if="v$.data.application_expand_mental.$model"
           class="w-100 h-75 my-4"
         >
-          <v-text-field
-            v-model.number="v$.data.application_poultry_hens_older.$model"
-            :error-messages="
-              v$.data.application_poultry_hens_older.$errors[0]?.$message
+          <v-slider
+            v-model.number="
+              v$.data.application_expand_mental_anxiety_slider.$model
             "
-            type="number"
-            label="Ange genomsnittlig antal höns äldre än 20 veckor i din besättning 2023"
-            prepend-icon="mdi:mdi-plus-box"
-          ></v-text-field>
-
-          <v-text-field
-            v-model.number="v$.data.application_poultry_hens_broilers.$model"
             :error-messages="
-              v$.data.application_poultry_hens_broilers.$errors[0]?.$message
+              v$.data.application_expand_mental_anxiety_slider.$errors[0]
+                ?.$message
             "
-            type="number"
-            label="Ange antal slaktkycklingar i en normal uppfödningsomgång under år 2023"
-            prepend-icon="mdi:mdi-plus-box"
-          ></v-text-field>
+            step="10"
+            show-ticks="always"
+            label="Hur mycket ångest eller oro upplever du ungefär per månad?"
+            tick-size="4"
+          ></v-slider>
 
-          <v-text-field
-            v-model.number="v$.data.application_poultry_hens_egg.$model"
-            type="number"
-            label="Ange genomsnittligt antal kycklingar för äggproduktion i din besättning 2023"
-            prepend-icon="mdi:mdi-plus-box"
-          ></v-text-field>
-
-          <v-text-field
-            v-model="application_poultry_hens_total_count"
+          <v-slider
+            v-model.number="
+              v$.data.application_expand_mental_stress_slider.$model
+            "
             :error-messages="
-              v$.application_poultry_hens_total_count.$errors[0]?.$message
+              v$.data.application_expand_mental_anxiety_slider.$errors[0]
+                ?.$message
             "
-            label="Total summa"
-            readonly
-            prepend-icon="mdi:mdi-equal-box"
-          ></v-text-field>
+            step="10"
+            show-ticks="always"
+            label="Hur bra är du på att hantera stress i din vardag?"
+            tick-size="4"
+          ></v-slider>
 
-          <custom-body class="mx-2">Anläggning</custom-body>
-          <v-container class="ma-2">
-            <div class="text-subtitle-1">
-              Om du har dina höns i en kommersiell verksamhet måste du ange
-              produktionsplats.
-            </div>
-            <v-text-field
-              v-if="formDataApply.application_sites_hens?.[0]"
-              v-model="formDataApply.application_sites_hens[0].value"
-              label="Produktionsplatsnummer"
-              prefix="SE"
-              hint="Ange den/de produktionsplatser där du bedrev din produktion 2023. Varje nummer består av upp till 6 siffor."
-            ></v-text-field>
-            <v-text-field
-              v-for="(
-                field, index
-              ) in formDataApply.application_sites_hens.slice(1)"
-              :key="index"
-              v-model="field.value"
-              :label="'Produktionsplatsnummer'"
-              prefix="SE"
-            >
-              <template #append>
-                <v-icon
-                  :style="{ color: 'red' }"
-                  @click="removeProductionPlaceHens(index)"
-                  >mdi:mdi-delete</v-icon
-                >
-              </template>
-            </v-text-field>
-            <v-btn
-              prepend-icon="mdi:mdi-plus"
-              color="success"
-              class="my-4"
-              @click="addProductionPlaceHens"
-            >
-              Lägg till produktionsplats
-            </v-btn>
-          </v-container>
+          <v-slider
+            v-model.number="
+              v$.data.application_expand_mental_health_slider.$model
+            "
+            :error-messages="
+              v$.data.application_expand_mental_health_slider.$errors[0]
+                ?.$message
+            "
+            step="10"
+            show-ticks="always"
+            label="Hur bra skulle du säga att din mentala hälsa är, allmänt?"
+            tick-size="4"
+          ></v-slider>
         </v-card>
       </v-container>
 
-      <v-container v-if="v$.data.application_poultry.$model">
+      <v-container v-if="v$.data.application_expand.$model">
         <v-checkbox
-          v-model="v$.data.application_poultry_turkeys.$model"
-          label="Kalkonproduktion"
+          v-model="v$.data.application_expand_physical.$model"
+          label="Jag vill besvara frågor om min fysiska hälsa"
           color="success"
           hide-details
         />
         <v-card
-          v-if="v$.data.application_poultry_turkeys.$model"
+          v-if="v$.data.application_expand_physical.$model"
           class="w-100 h-75 ma-2"
         >
-          <v-text-field
-            v-model.number="v$.data.application_poultry_turkeys_older.$model"
+          <v-slider
+            v-model.number="
+              v$.data.application_expand_physical_health_slider.$model
+            "
+            :error-messages="
+              v$.data.application_expand_physical_health_slider.$errors[0]
+                ?.$message
+            "
+            step="10"
+            show-ticks="always"
+            label="Hur skulle du bedöma din allmänna fysiska hälsa?"
+            tick-size="4"
+          ></v-slider>
+
+          <v-slider
+            v-model.number="
+              v$.data.application_expand_physical_activity_slider.$model
+            "
+            :error-messages="
+              v$.data.application_expand_physical_activity_slider.$errors[0]
+                ?.$message
+            "
+            step="10"
+            show-ticks="always"
+            label="Hur ofta deltar du i regelbunden fysisk aktivitet, så som träning eller motion?"
+            tick-size="4"
+          ></v-slider>
+
+          <v-slider
+            v-model.number="
+              v$.data.application_expand_physical_body_slider.$model
+            "
+            :error-messages="
+              v$.data.application_expand_physical_body_slider.$errors[0]
+                ?.$message
+            "
+            step="10"
+            show-ticks="always"
+            label="Hur nöjd är du med din kropp i överlag?"
+            tick-size="4"
+          ></v-slider>
+          <!-- <v-text-field
+            v-model.number="v$.data.application_expand_physical_older.$model"
             label="Ange genomsnittligt antal kalkoner över 24 veckor i din besättning 2023"
             prepend-icon="mdi:mdi-plus-box"
           ></v-text-field>
 
           <v-text-field
-            v-model.number="v$.data.application_poultry_turkeys_broilers.$model"
+            v-model.number="v$.data.application_expand_physical_broilers.$model"
             label="Ange antal slaktkalkoner i en normal uppfödningsomgång under år 2023"
             prepend-icon="mdi:mdi-plus-box"
           ></v-text-field>
 
           <v-text-field
-            v-model.number="v$.data.application_poultry_turkeys_egg.$model"
+            v-model.number="v$.data.application_expand_physical_egg.$model"
             label="Ange genomsnittligt antal kalkonkycklingar för äggproduktion i din besättning 2023"
             prepend-icon="mdi:mdi-plus-box"
           ></v-text-field>
 
           <v-text-field
-            v-model="application_poultry_turkeys_total_count"
+            v-model="application_expand_physical_total_count"
             label="Total summa"
             readonly
             prepend-icon="mdi:mdi-equal-box"
           ></v-text-field>
-
-          <custom-body class="mx-2">Anläggning</custom-body>
+ -->
+          <!-- <custom-body class="mx-2">Anläggning</custom-body>
           <v-container class="ma-2">
             <div class="text-subtitle-1">
               Om du har dina kalkoner i en kommersiell verksamhet måste du ange
@@ -196,7 +202,7 @@
             >
               Lägg till produktionsplats
             </v-btn>
-          </v-container>
+          </v-container> -->
         </v-card>
       </v-container>
     </v-container>
@@ -214,23 +220,23 @@ const props = defineProps({
   formDataApplyObj: {
     type: Object,
     default: () => ({
-      application_area: false,
-      application_poultry: false,
+      application_check: false,
+      application_expand: false,
 
-      application_poultry_hens_older: null,
-      application_poultry_hens_broilers: null,
-      application_poultry_hens_egg: null,
+      application_expand_mental_anxiety_slider: null,
+      application_expand_mental_stress_slider: null,
+      application_expand_mental_health_slider: null,
 
-      application_poultry_hens: false,
-      application_poultry_turkeys: false,
+      application_expand_mental: false,
+      application_expand_physical: false,
 
-      application_poultry_turkeys_older: null,
-      application_poultry_turkeys_broilers: null,
-      application_poultry_turkeys_egg: null,
+      application_expand_physical_health_slider: null,
+      application_expand_physical_activity_slider: null,
+      application_expand_physical_body_slider: null,
 
       // Initial value in Product Place fields array
-      application_sites_turkeys: [{ value: "" }],
-      application_sites_hens: [{ value: "" }],
+      /* application_sites_turkeys: [{ value: "" }],
+      application_sites_hens: [{ value: "" }], */
     }),
   },
   valid: {
@@ -239,19 +245,19 @@ const props = defineProps({
   },
 });
 
-const application_poultry_hens_total_count = computed(
+/* const application_expand_mental_total_count = computed(
   () =>
-    Number(props.formDataApplyObj.application_poultry_hens_older) +
-    Number(props.formDataApplyObj.application_poultry_hens_broilers) +
-    Number(props.formDataApplyObj.application_poultry_hens_egg)
+    Number(props.formDataApplyObj.application_expand_mental_older) +
+    Number(props.formDataApplyObj.application_expand_mental_broilers) +
+    Number(props.formDataApplyObj.application_expand_mental_egg)
 );
 
-const application_poultry_turkeys_total_count = computed(
+const application_expand_physical_total_count = computed(
   () =>
-    Number(props.formDataApplyObj.application_poultry_turkeys_older) +
-    Number(props.formDataApplyObj.application_poultry_turkeys_broilers) +
-    Number(props.formDataApplyObj.application_poultry_turkeys_egg)
-);
+    Number(props.formDataApplyObj.application_expand_physical_older) +
+    Number(props.formDataApplyObj.application_expand_physical_broilers) +
+    Number(props.formDataApplyObj.application_expand_physical_egg)
+); */
 
 const emit = defineEmits([
   "update:modelValue",
@@ -263,7 +269,7 @@ const { formDataApplyObj: formDataApply, valid: isFormValid } = useVModels(
   emit
 );
 
-function addProductionPlaceHens() {
+/* function addProductionPlaceHens() {
   formDataApply.value.application_sites_hens.push({ value: "" });
 }
 
@@ -277,62 +283,62 @@ function addProductionPlaceTurkeys() {
 
 function removeProductionPlaceTurkeys(index) {
   formDataApply.value.application_sites_turkeys.splice(index, 1);
-}
+} */
 
-const files = ref([]);
+/* const files = ref([]); */
 
 const rules = computed(() => ({
   data: {
-    application_area: {
+    application_check: {
       // Custom validator here because checkboxes return `true` or `false` and both satisfies the `required` validator provided by vuelidate
       requiredUnless: (value) =>
-        value === true || !!formDataApply.value.application_poultry,
+        value === true || !!formDataApply.value.application_expand,
     },
 
-    application_poultry: {},
+    application_expand: {},
 
-    application_poultry_hens: {
+    application_expand_mental: {
       requiredUnless: (value) =>
-        // Custom validator here because we only check validation if `application_poultry` is checked and if `application_poultry_turkeys` is not checked
+        // Custom validator here because we only check validation if `application_expand` is checked and if `application_expand_physical` is not checked
         value === true ||
-        !formDataApply.value.application_poultry ||
-        !!formDataApply.value.application_poultry_turkeys,
+        !formDataApply.value.application_expand ||
+        !!formDataApply.value.application_expand_physical,
     },
 
-    application_poultry_turkeys: {
+    application_expand_physical: {
       requiredUnless: (value) =>
-        // Custom validator here because we only check validation if `application_poultry` is checked and if `application_poultry_turkeys` is not checked
+        // Custom validator here because we only check validation if `application_expand` is checked and if `application_expand_physical` is not checked
         value === true ||
-        !formDataApply.value.application_poultry ||
-        !!formDataApply.value.application_poultry_hens,
+        !formDataApply.value.application_expand ||
+        !!formDataApply.value.application_expand_mental,
     },
 
-    application_poultry_hens_older: {
-      numeric,
+    application_expand_mental_anxiety_slider: {
+      /* numeric, */
     },
-    application_poultry_hens_broilers: {
-      numeric,
+    application_expand_mental_stress_slider: {
+      /* numeric, */
     },
-    application_poultry_hens_egg: {
-      numeric,
+    application_expand_mental_health_slider: {
+      /* numeric, */
     },
 
-    application_poultry_turkeys_older: {
-      numeric,
+    application_expand_physical_health_slider: {
+      /* numeric, */
     },
-    application_poultry_turkeys_broilers: {
-      numeric,
+    application_expand_physical_activity_slider: {
+      /* numeric, */
     },
-    application_poultry_turkeys_egg: {
-      numeric,
+    application_expand_physical_body_slider: {
+      /* numeric, */
     },
     application_sites_turkeys: {
       // We need this to specify that `application_site_hens` is an array and we need to implement validation for each element/child
       $each: helpers.forEach({
         value: {
-          // Custom validator here because we only need to check validation if `application_poultry_hens` is true/checked
+          // Custom validator here because we only need to check validation if `application_expand_mental` is true/checked
           isRequired: (value) =>
-            !formDataApply.value.application_poultry_turkeys ||
+            !formDataApply.value.application_expand_physical ||
             required.$validator(value),
         },
       }),
@@ -341,33 +347,33 @@ const rules = computed(() => ({
       // We need this to specify that `application_site_hens` is an array and we need to implement validation for each element/child
       $each: helpers.forEach({
         value: {
-          // Custom validator here because we only need to check validation if `application_poultry_hens` is true/checked
+          // Custom validator here because we only need to check validation if `application_expand_mental` is true/checked
           isRequired: (value) =>
-            !formDataApply.value.application_poultry_hens ||
+            !formDataApply.value.application_expand_mental ||
             required.$validator(value),
         },
       }),
     },
   },
 
-  application_poultry_hens_total_count: {
-    // Custom validator here because we only need to check validation if `application_poultry_hens` is true/checked
+  application_expand_mental_total_count: {
+    // Custom validator here because we only need to check validation if `application_expand_mental` is true/checked
     moreThanOne: (value) =>
-      !formDataApply.value.application_poultry_hens ||
+      !formDataApply.value.application_expand_mental ||
       minValue(1).$validator(value),
   },
 
-  application_poultry_turkeys_total_count: {
-    // Custom validator here because we only need to check validation if `application_poultry_hens` is true/checked
+  application_expand_physical_total_count: {
+    // Custom validator here because we only need to check validation if `application_expand_mental` is true/checked
     moreThanOne: (value) =>
-      !formDataApply.value.application_poultry_turkeys ||
+      !formDataApply.value.application_expand_physical ||
       minValue(1).$validator(value),
   },
 }));
 
 const v$ = useVuelidate(rules, {
   data: formDataApply.value,
-  application_poultry_hens_total_count,
+  /* application_expand_mental_total_count, */
 });
 
 watchEffect(() => {
