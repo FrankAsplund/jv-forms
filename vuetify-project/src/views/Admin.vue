@@ -1,7 +1,8 @@
 <template>
+  <!-- <v-app> -->
   <div class="d-flex bg-indigo-lighten-4 justify-center h-100">
     <v-container class="rounded mx-12 mt-16" :elevation="12">
-      <v-app>
+      <v-card class="rounded-t-lg">
         <div class="d-flex justify-center ma-4">
           <v-text-field
             class="w-50 mx-12"
@@ -53,14 +54,19 @@
             </v-card-item>
             <v-card-actions>
               <v-btn variant="tonal" color="red" @click="deleteData(post.id)">
-                Delete user
+                Radera inlägg
               </v-btn>
 
               <!-- Modal -->
 
-              <v-dialog v-model="dialog" class="w-50 h-75">
+              <v-dialog v-model="post.dialog" class="w-50 h-75">
                 <template v-slot:activator="{ props }">
-                  <v-btn variant="tonal" color="success" v-bind="props"
+                  <v-btn
+                    variant="tonal"
+                    color="success"
+                    v-bind="props"
+                    @click="selectedPost = post"
+                  >
                     >Läs mer</v-btn
                   >
                 </template>
@@ -213,9 +219,10 @@
             </v-card-actions>
           </v-card>
         </div>
-      </v-app>
+      </v-card>
     </v-container>
   </div>
+  <!-- </v-app> -->
 </template>
 
 <script setup>
@@ -223,8 +230,22 @@ import axios from "axios";
 import { ref, onMounted } from "vue";
 import CustomHeader from "../components/form-components/c-header.vue";
 
-const dialog = ref(false);
-const posts = ref([]);
+/* const dialog = ref(false); */
+const selectedPost = ref(null);
+/* const posts = ref([]); */
+
+const posts = ref([
+  // Example post data
+  {
+    id: "",
+    FormData: {},
+    FormApply: {},
+
+    dialog: false,
+  },
+  // Add more posts here
+]);
+
 const search = ref(null);
 
 const deleteData = async (id) => {
