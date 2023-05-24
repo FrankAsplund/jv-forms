@@ -1,23 +1,30 @@
 <template>
-  <div class="mt-8">
+  <div class="mt-12">
     <v-bottom-navigation :elevation="8" grow class="bg-indigo-darken-1">
       <v-btn value="recent">
-        <v-icon>mdi-history</v-icon>
+        <v-icon>mdi-twitter</v-icon>
 
-        Recent
+        <a href="Twitter.com">Twitter</a>
       </v-btn>
 
       <v-btn value="favorites">
-        <v-icon>mdi-heart</v-icon>
+        <v-icon>mdi-github</v-icon>
 
-        Favorites
+        <a href="https://github.com/FrankAsplund/jv-forms">Github</a>
       </v-btn>
 
       <v-btn value="nearby">
-        <v-icon>mdi-map-marker</v-icon>
+        <v-icon>mdi-school</v-icon>
 
-        Nearby
+        <a href="https://kyh.se/">School</a>
       </v-btn>
     </v-bottom-navigation>
   </div>
 </template>
+
+<style scoped>
+a {
+  text-decoration: none !important;
+  text-decoration-line: none !important;
+}
+</style>

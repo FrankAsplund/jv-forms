@@ -1,7 +1,7 @@
 <template>
   <v-form v-if="v$" validate-on="submit" variant="filled">
     <v-container class="pa-2 rounded-sm align-items">
-      <custom-body>Ange dina uppgifter</custom-body>
+      <custom-body body="Ange dina personliga uppgifter" />
       <div variant="outlined">
         <v-row variant="outlined" class="ma-2 pa-0">
           <v-text-field
@@ -59,51 +59,18 @@
 
       <v-row variant="tonal" class="pa-2">
         <v-col>
-          <custom-body
-            >Söker du som privatperson/enskild firma eller som
-            ombud?</custom-body
-          >
+          <custom-body body="Vilket län bor du i?" />
           <v-select
-            label="Jag söker som..."
+            label="Län"
             v-model="v$.applicant_type.$model"
             :error-messages="v$.applicant_type.$errors[0]?.$message"
             prepend-inner-icon="mdi:mdi-form-select"
-            :items="[
-              'Jag söker som privatperson/enskild firma',
-              'Jag söker som ombud för privatperson/enskild firma',
-              'Jag söker som ombud för ett företag eller organisation',
-            ]"
+            item-title="place"
+            :items="items"
             return-object
           ></v-select>
         </v-col>
       </v-row>
-      <v-container
-        v-if="
-          formData.applicant_type === 'Jag söker som privatperson/enskild firma'
-        "
-      >
-        <v-container class="my-2">
-          <custom-body>Kundnummer</custom-body>
-          <v-select
-            v-model="v$.applicant_county_name.$model"
-            :error-messages="v$.applicant_county_name.$errors[0]?.$message"
-            label="Länsbokstav"
-            item-title="name"
-            :items="items"
-            prepend-inner-icon="mdi:mdi-format-letter-case"
-            return-object
-          ></v-select>
-          <v-text-field
-            v-model="v$.applicant_county.$model"
-            :error-messages="v$.applicant_county.$errors[0]?.$message"
-            type="text"
-            label="Kundnummer"
-            placeholder="XXXXXX"
-            prepend-inner-icon="mdi:mdi-pound-box"
-            hint="Ange de upp till 6 siffror som tillsammans med länsbokstaven utgör stödmottagarens kundnummer. Observera att kundnummer INTE är samma som produktionsplatsnummer (SE-nr)."
-          ></v-text-field>
-        </v-container>
-      </v-container>
     </v-container>
   </v-form>
 </template>

@@ -9,6 +9,8 @@
         <Admin v-if="loggedIn" />
 
         <v-btn icon="mdi-magnify"></v-btn>
+
+        Hälsoundersökning
       </template>
     </v-app-bar>
   </div>

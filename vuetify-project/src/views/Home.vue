@@ -193,19 +193,6 @@ async function submitForm() {
   loading.value = true;
   const data = { FormData: formData, FormApply: formDataApply };
 
-  /* formDataApply.application_poultry_hens_total_count =
-    formDataApply.application_poultry_hens_older +
-    formDataApply.application_poultry_hens_broilers +
-    formDataApply.application_poultry_hens_egg;
-
-  formDataApply.application_poultry_turkeys_total_count =
-    formDataApply.application_poultry_turkeys_older +
-    formDataApply.application_poultry_turkeys_broilers +
-    formDataApply.application_poultry_turkeys_egg;
-
-  formDataApply.application_sites_turkeys;
-  formDataApply.application_sites_hens; */
-
   formDataApply.application_expand_mental;
   formDataApply.application_expand_physical;
 
@@ -213,7 +200,6 @@ async function submitForm() {
     axios
       .post("http://localhost:8000/posts", data)
       .then((response) => console.log(response));
-    /* console.log(responseData.value); */
     responseData.value = data;
 
     step.value = 4;
@@ -225,12 +211,11 @@ async function submitForm() {
 </script>
 
 <style>
-/* Temporary styling */
-.basic-layout-body {
+/* .basic-layout-body {
   display: flex;
   padding: 0;
   width: 100%;
-}
+} */
 
 .loading-indicator {
   position: fixed;

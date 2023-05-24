@@ -1,7 +1,9 @@
 <template>
   <v-form v-if="v$" validate-on="submit" variant="filled">
     <v-container class="pa-2 rounded-sm align-items">
-      <custom-body>Undersökning för mental hälsa</custom-body>
+      <custom-body
+        body="Nu kommer ett par frågor om din hälsa. Besvara enbart vad du känner dig bekväm med."
+      />
 
       <v-hover v-slot="{ isHovering, props: hprops }">
         <v-card
