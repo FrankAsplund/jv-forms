@@ -71,16 +71,18 @@
           <thead>
             <tr>
               <th class="text-left">
-                Jag söker krisstöd för min fjäderfäproduktion
+                Jag mår fysiskt och mentalt bra de flesta dagarna
               </th>
               <th class="text-right">
-                {{ formDataApply.application_poultry ? "Ja" : "Nej" }}
+                {{ formDataApply.application_check ? "Ja" : "Nej" }}
               </th>
             </tr>
             <tr>
-              <th class="text-left">Jag söker krisstöd för areal</th>
+              <th class="text-left">
+                Jag är villig att besvara ytterligare frågor om min hälsa
+              </th>
               <th class="text-right">
-                {{ formDataApply.application_check ? "Ja" : "Nej" }}
+                {{ formDataApply.application_expand ? "Ja" : "Nej" }}
               </th>
             </tr>
           </thead>
@@ -104,11 +106,11 @@
               <br />
               <v-list-item prepend-icon="mdi:mdi-circle-small">
                 Jag är införstådd med och uppfyller de villkor som finns för att
-                få ta del av stödet.
+                få ta del av undersökningen.
               </v-list-item>
               <v-list-item prepend-icon="mdi:mdi-circle-small">
-                Ansökan inte gäller ett företag i ekonomiska svårigheter enligt
-                art. 2.14 i förordningen (EU) nr 702/2014
+                Jag förstår och går med på att denna undersökningen kan användas
+                och
               </v-list-item>
             </v-list>
           </div>

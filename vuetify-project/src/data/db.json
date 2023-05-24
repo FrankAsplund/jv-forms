@@ -82,29 +82,29 @@
     },
     {
       "FormData": {
-        "applicant_firstname": "",
-        "applicant_lastname": "",
-        "applicant_personal_number": "",
-        "contact_email": "",
-        "confirmContactEmail": "",
-        "applicant_customer_number": "",
-        "applicant_type": "",
+        "applicant_firstname": "Johan",
+        "applicant_lastname": "Falk",
+        "applicant_personal_number": "000000-1111",
+        "contact_email": "johan.falk@test.se",
+        "confirmContactEmail": "johan.falk@test.se",
+        "applicant_customer_number": "123456789",
+        "applicant_type": "Jag söker som ombud för privatperson/enskild firma",
         "applicant_county_name": "",
         "applicant_county": ""
       },
       "FormApply": {
         "application_check": true,
         "application_expand": true,
-        "application_expand_mental_anxiety_slider": 50,
-        "application_expand_mental_stress_slider": 20,
-        "application_expand_mental_health_slider": 50,
+        "application_expand_mental_anxiety_slider": 100,
+        "application_expand_mental_stress_slider": 100,
+        "application_expand_mental_health_slider": 100,
         "application_expand_mental": true,
         "application_expand_physical": true,
-        "application_expand_physical_health_slider": 30,
-        "application_expand_physical_activity_slider": 30,
-        "application_expand_physical_body_slider": 30
+        "application_expand_physical_health_slider": 100,
+        "application_expand_physical_activity_slider": 100,
+        "application_expand_physical_body_slider": 100
       },
-      "id": 5
+      "id": 6
     }
   ],
   "loginStatus": [

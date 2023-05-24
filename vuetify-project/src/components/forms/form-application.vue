@@ -332,48 +332,15 @@ const rules = computed(() => ({
     application_expand_physical_body_slider: {
       /* numeric, */
     },
-    application_sites_turkeys: {
-      // We need this to specify that `application_site_hens` is an array and we need to implement validation for each element/child
-      $each: helpers.forEach({
-        value: {
-          // Custom validator here because we only need to check validation if `application_expand_mental` is true/checked
-          isRequired: (value) =>
-            !formDataApply.value.application_expand_physical ||
-            required.$validator(value),
-        },
-      }),
-    },
-    application_sites_hens: {
-      // We need this to specify that `application_site_hens` is an array and we need to implement validation for each element/child
-      $each: helpers.forEach({
-        value: {
-          // Custom validator here because we only need to check validation if `application_expand_mental` is true/checked
-          isRequired: (value) =>
-            !formDataApply.value.application_expand_mental ||
-            required.$validator(value),
-        },
-      }),
-    },
   },
 
-  application_expand_mental_total_count: {
-    // Custom validator here because we only need to check validation if `application_expand_mental` is true/checked
-    moreThanOne: (value) =>
-      !formDataApply.value.application_expand_mental ||
-      minValue(1).$validator(value),
-  },
+  application_expand_mental_total_count: {},
 
-  application_expand_physical_total_count: {
-    // Custom validator here because we only need to check validation if `application_expand_mental` is true/checked
-    moreThanOne: (value) =>
-      !formDataApply.value.application_expand_physical ||
-      minValue(1).$validator(value),
-  },
+  application_expand_physical_total_count: {},
 }));
 
 const v$ = useVuelidate(rules, {
   data: formDataApply.value,
-  /* application_expand_mental_total_count, */
 });
 
 watchEffect(() => {

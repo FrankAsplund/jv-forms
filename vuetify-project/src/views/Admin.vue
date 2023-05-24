@@ -2,6 +2,7 @@
   <!-- <v-app> -->
   <div class="d-flex bg-indigo-lighten-4 justify-center h-100">
     <v-container class="rounded mx-12 mt-16" :elevation="12">
+      <custom-header header="Alla inskickade formulär" />
       <v-card class="rounded-t-lg">
         <div class="d-flex justify-center ma-4">
           <v-text-field
@@ -17,7 +18,6 @@
         </div>
 
         <div class="d-flex align-content-space-between flex-wrap ma-4 pa-2">
-          <custom-header> Alla Formulär </custom-header>
           <v-card
             v-for="post in posts"
             :key="post.id"
@@ -41,19 +41,25 @@
                   E-post: {{ post.FormData.contact_email }}
                 </div>
                 <div class="text-caption">
-                  Avdelning: {{ post.FormData.department }}
+                  Personnummer: {{ post.FormData.applicant_personal_number }}
                 </div>
                 <div class="text-caption">
                   Söktyp: {{ post.FormData.applicant_type }}
                 </div>
-                <div class="text-caption">
+                <!-- <div class="text-caption">
                   Län {{ post.FormData.applicant_county_name }}
                   {{ post.FormData.applicant_county }}
-                </div>
+                </div> -->
               </div>
             </v-card-item>
             <v-card-actions>
-              <v-btn variant="tonal" color="red" @click="deleteData(post.id)">
+              <v-btn
+                class="text-none"
+                prepend-icon="mdi-trash-can"
+                variant="tonal"
+                color="red"
+                @click="deleteData(post.id)"
+              >
                 Radera inlägg
               </v-btn>
 
@@ -62,16 +68,19 @@
               <v-dialog v-model="post.dialog" class="w-50 h-75">
                 <template v-slot:activator="{ props }">
                   <v-btn
+                    class="text-none"
+                    prepend-icon="mdi-arrow-expand"
                     variant="tonal"
-                    color="success"
+                    color="primary"
                     v-bind="props"
                     @click="selectedPost = post"
                   >
-                    >Läs mer</v-btn
-                  >
+                    Läs mer
+                  </v-btn>
                 </template>
 
                 <v-card>
+                  <custom-header header="Detaljerad information" />
                   <v-card-text>
                     <v-table density="compact">
                       <thead>
@@ -90,7 +99,7 @@
                         <tr>
                           <th class="text-left">
                             "Jag är villig att besvara ytterligare frågor om min
-                            hälsa", :
+                            hälsa"
                           </th>
 
                           <th class="text-right">
@@ -230,12 +239,9 @@ import axios from "axios";
 import { ref, onMounted } from "vue";
 import CustomHeader from "../components/form-components/c-header.vue";
 
-/* const dialog = ref(false); */
 const selectedPost = ref(null);
-/* const posts = ref([]); */
 
 const posts = ref([
-  // Example post data
   {
     id: "",
     FormData: {},
@@ -243,7 +249,6 @@ const posts = ref([
 
     dialog: false,
   },
-  // Add more posts here
 ]);
 
 const search = ref(null);
@@ -251,7 +256,7 @@ const search = ref(null);
 const deleteData = async (id) => {
   if (
     confirm(
-      "Are you sure you want to delete this user from the database? This choice is permanent and cannot be regretted."
+      "Är du säker på att du vill radera detta formuläret från databasen? Detta valet är permanent och kan inte ångras."
     )
   ) {
     try {
