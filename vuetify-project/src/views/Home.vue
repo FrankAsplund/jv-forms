@@ -6,12 +6,11 @@
           class="bg-indigo-darken-1 text-h5 font-weight-bold justify-center elevation-4"
           dark
         >
-          <v-breadcrumbs :items="items">
+          <v-breadcrumbs class="pa-4" :items="items" mobile-breakpoint="580">
             <template #title="{ item }">
               {{ item.title }}
             </template>
           </v-breadcrumbs>
-          <v-toolbar-title class="text-h5 font-weight-bold"></v-toolbar-title>
         </v-toolbar>
 
         <v-card-actions>
@@ -32,7 +31,7 @@
           ></v-btn>
         </v-card-actions>
 
-        <v-window v-model="step" class="mx-12">
+        <v-window v-model="step" class="mx-6">
           <v-window-item :value="1">
             <personal-info-form
               v-model:formDataObj="formData"
@@ -107,6 +106,16 @@ import DoneForm from "../components/forms/form-done.vue";
 import { reactive, watchEffect, ref, watch, computed } from "vue";
 import axios from "axios";
 
+import { onMounted } from "vue";
+import { useDisplay } from "vuetify";
+
+const { width, mobile } = useDisplay();
+
+onMounted(() => {
+  console.log(width.value); // 960
+  console.log(mobile.value); // true
+});
+
 const loading = ref(false);
 
 const formData = reactive({
@@ -135,10 +144,6 @@ const formDataApply = reactive({
   application_expand_physical_health_slider: null,
   application_expand_physical_activity_slider: null,
   application_expand_physical_body_slider: null,
-
-  // Initial value in Product Place fields array
-  /* application_sites_turkeys: [{ value: "" }],
-  application_sites_hens: [{ value: "" }], */
 });
 
 const step = ref(1);
@@ -211,16 +216,29 @@ async function submitForm() {
 </script>
 
 <style>
-/* .basic-layout-body {
-  display: flex;
-  padding: 0;
-  width: 100%;
-} */
-
 .loading-indicator {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+@media only screen and (max-width: 600px) {
+  .v-breadcrumbs {
+    display: block !important;
+    /* display: flex; */
+    align-items: center;
+    line-height: 1.375rem;
+    /* padding: 16px 12px; */
+  }
+
+  .text-h5 {
+    font-size: 1.5rem !important;
+  }
+
+  .mx-12 {
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+  }
 }
 </style>
