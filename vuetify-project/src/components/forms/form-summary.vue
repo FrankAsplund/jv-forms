@@ -12,9 +12,10 @@
       </div>
     </div>
 
-    <div class="flex-container">
-      <div class="flex-child">
-        <div class="box-title">Grunduppgifter</div>
+    <v-container class="mb-2">
+      <v-container class="elevation-2 pa-2 mb-2">
+        <custom-body body="Grunduppgifter" />
+
         <v-table density="compact">
           <thead>
             <tr>
@@ -42,31 +43,24 @@
               </th>
             </tr>
             <tr>
-              <th class="text-left">Jag söker som</th>
+              <th class="text-left">Län</th>
               <th class="text-right">{{ formData.applicant_type }}</th>
-            </tr>
-            <tr>
-              <th class="text-left">Länsbokstav</th>
-              <th class="text-right">
-                {{ formData.applicant_county_name.name }}
-              </th>
-            </tr>
-            <tr>
-              <th class="text-left">Länsnummer</th>
-              <th class="text-right">{{ formData.applicant_county }}</th>
             </tr>
           </thead>
         </v-table>
-        <div class="summary-btn">
-          <v-btn @click="stepBack_personal_info_form" color="success"
-            >Ändra uppgifter</v-btn
-          >
-        </div>
-      </div>
+        <!-- <div class="justify-center pa-2"> -->
+        <v-btn
+          @click="stepBack_personal_info_form"
+          class="justify-center pa-2 my-2"
+          color="success"
+          >Ändra uppgifter</v-btn
+        >
+        <!-- </div> -->
+      </v-container>
 
-      <div class="flex-child">
-        <div class="box-title">Ansökan</div>
-        <div class="text-caption"></div>
+      <v-container class="elevation-2 pa-2 mb-2">
+        <custom-body body="Undersökning" />
+        <!-- <div class="text-caption"></div> -->
         <v-table density="compact">
           <thead>
             <tr>
@@ -86,46 +80,48 @@
               </th>
             </tr>
           </thead>
-          <div class="summary-btn">
-            <v-btn @click="stepBack_application_form" color="success"
-              >Ändra uppgifter</v-btn
-            >
-          </div>
+          <v-btn
+            @click="stepBack_application_form"
+            class="justify-center pa-2 my-2"
+            color="success"
+            >Ändra uppgifter</v-btn
+          >
         </v-table>
-      </div>
-    </div>
+      </v-container>
 
-    <v-container class="summaryConfirmContainer" fluid>
-      <div class="text-subtitle-1">Godkännande och försäkran</div>
-      <v-checkbox v-model="summaryCheckbox" color="success">
-        <template #label>
-          <div>
-            <div class="text-body-2">Härmed ansöker jag om krisstödet 2023</div>
-            <v-list>
+      <v-card
+        variant="elevated"
+        class="elevation-4 justify-center w-100 h-50 my-4"
+      >
+        <custom-body class="pa-2" body="Godkännande och försäkran" />
+        <v-checkbox
+          class="text-high-emphasis font-weight-regular pa-2"
+          v-model="summaryCheckbox"
+          color="success"
+        >
+          <template #label>
+            <div>
               Jag intygar att:
               <br />
-              <v-list-item prepend-icon="mdi:mdi-circle-small">
-                Jag är införstådd med och uppfyller de villkor som finns för att
-                få ta del av undersökningen.
-              </v-list-item>
-              <v-list-item prepend-icon="mdi:mdi-circle-small">
-                Jag förstår och går med på att denna undersökningen kan användas
-                och
-              </v-list-item>
-            </v-list>
-          </div>
-        </template>
-      </v-checkbox>
+
+              Jag är införstådd med och uppfyller de villkor som finns för att
+              få ta del av undersökningen. Jag förstår och går med på att denna
+              undersökningen kan användas och granskas av behöriga personer.
+            </div>
+          </template>
+        </v-checkbox>
+      </v-card>
+      <div v-if="summaryCheckbox" class="send-btn">
+        <v-btn color="success" size="large" @click="submit()">Skicka in</v-btn>
+      </div>
     </v-container>
-    <div v-if="summaryCheckbox" class="send-btn">
-      <v-btn color="success" @click="submit()">Skicka in</v-btn>
-    </div>
   </v-form>
 </template>
 
 <script setup>
 import { ref } from "vue";
 import { useVModel } from "@vueuse/core";
+import CustomBody from "../form-components/c-body.vue";
 
 const props = defineProps({
   formData: {
@@ -144,12 +140,10 @@ const props = defineProps({
 
 function stepBack_personal_info_form() {
   stepProp.value = 1;
-  console.log(stepProp.value);
 }
 
 function stepBack_application_form() {
   stepProp.value--;
-  console.log(stepProp.value);
 }
 
 const summaryCheckbox = ref(false);
@@ -169,53 +163,28 @@ const submit = () => {
 <style scoped>
 .send-btn {
   text-align: center;
-  padding: 10px;
+  /* padding: 10px; */
 }
 
-.summary-btn {
+/* .summary-btn {
   text-align: center;
   padding: 10px;
-}
+} */
 
-.summaryConfirmContainer {
+/* .summaryConfirmContainer {
   margin: auto;
   width: 70%;
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
     rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
   padding: 10px;
   margin-bottom: 0.5rem;
-}
+} */
 
-.flex-container {
+/* .flex-container {
   display: flex;
   margin-bottom: 2rem;
   width: 100%;
-}
-
-.flex-child {
-  flex: 1;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
-    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
-}
-
-.flex-child:first-child {
-  margin-right: 20px;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
-    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
-}
-
-.box-title {
-  font-size: 16px;
-  font-weight: bold;
-}
-
-.apply-info {
-  padding-bottom: 1.1rem;
-}
-
-.h1-summary {
-  margin-top: 1.5rem;
-}
+} */
 
 .line-divider {
   margin-top: 1.5rem;
@@ -225,5 +194,18 @@ const submit = () => {
 
 .summary-info {
   margin-bottom: 1.5rem;
+}
+
+@media only screen and (max-width: 600px) {
+  .flex-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  /* .confirmCard {
+    display: grid !important;
+    width: 90% !important;
+  } */
 }
 </style>

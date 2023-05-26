@@ -16,7 +16,7 @@
       <v-btn value="nearby">
         <v-icon>mdi-school</v-icon>
 
-        <a href="https://kyh.se/">School</a>
+        <a href="https://kyh.se/">Skola</a>
       </v-btn>
     </v-bottom-navigation>
   </div>
@@ -24,6 +24,7 @@
 
 <style scoped>
 a {
+  color: white;
   text-decoration: none !important;
   text-decoration-line: none !important;
 }

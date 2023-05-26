@@ -173,7 +173,7 @@ const items = reactive([
     disabled: false,
   },
   {
-    title: "Ansökan",
+    title: "Undersökning",
     disabled: true,
   },
   {
@@ -226,10 +226,9 @@ async function submitForm() {
 @media only screen and (max-width: 600px) {
   .v-breadcrumbs {
     display: block !important;
-    /* display: flex; */
     align-items: center;
     line-height: 1.375rem;
-    /* padding: 16px 12px; */
+    padding: 0 8px 0 8px !important;
   }
 
   .text-h5 {

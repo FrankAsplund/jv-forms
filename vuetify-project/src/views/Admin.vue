@@ -4,7 +4,7 @@
     <v-container class="rounded mx-12 mt-16" :elevation="12">
       <custom-header header="Alla inskickade formulär" />
       <v-card class="rounded-t-lg">
-        <div class="d-flex justify-center ma-4">
+        <div class="d-flex justify-center ma-4 pa-2">
           <v-text-field
             class="w-50 mx-12"
             prepend-icon="mdi-magnify"
